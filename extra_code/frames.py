@@ -59,67 +59,26 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
             if ball1['type'] == 'splitting':
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
-                    ball2depletion = 2.5*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                    tempdepletion = ball2['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                    var[1][2] -= tempdepletion
-                    ball2['hp'] -= ball2depletion
-
-                    var[1][0] = -var[1][0]
-                    var[1][1] = -var[1][1]
-                    ball2['dx'] = -ball2['dx']
-                    ball2['dy'] = -ball2['dy']
-
-                    var[1][2] = var[1][2] / 2
-                    if var[1][2] <= 0:
-                        canvas.delete(var[0])
-                    splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-var[1][0],-var[1][1],var[1][2]]])
-
-                    if ball2['type'] == 'duo':
-                        if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
-                            tempdepletion = 10*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                            var[1][2] -= tempdepletion
-    
-                            var[1][0] = -var[1][0]
-                            var[1][1] = -var[1][1]
-                            ball2['edx'] = -ball2['edx']
-                            ball2['edy'] = -ball2['edy']
-    
-                            var[1][2] = var[1][2] / 2
-                            if var[1][2] <= 0:
-                                canvas.delete(var[0])
-                            splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-var[1][0],-var[1][1],var[1][2]]])
+                    splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
+                    ball2['shape'], ball2['type'], ball2['damage'], ball2['edx'], ball2['edy'], ball2['hp'], num=num)
+                if ball2['type'] == 'duo':
+                    if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
+                        splits, var[1][0], var[1][1], var[1][2], ball2['ex'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
+                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
+                        ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], num=num, duoAttk=2)
 
             elif ball2['type'] == 'splitting':
                 if (tempPos[2] >= pos1[0] and tempPos[0] <= pos1[2] and tempPos[3] >= pos1[1] and tempPos[1] <= pos1[3]):
-                    ball1depletion = 2.5*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                    tempdepletion = ball1['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                    var[1][2] -= tempdepletion
-                    ball1['hp'] -= ball1depletion
-
-                    var[1][0] = -var[1][0]
-                    var[1][1] = -var[1][1]
-                    ball1['dx'] = -ball1['dx']
-                    ball1['dy'] = -ball1['dy']
-
-                    var[1][2] = var[1][2] / 2
-                    if var[1][2] <= 0:
-                        canvas.delete(var[0])
-                    splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-var[1][0],-var[1][1],var[1][2]]])
-
+                    splits, ball1['dx'], ball1['dy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
+                    ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
+                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], num=num)
                 if ball1['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
-                        tempdepletion = 10*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                        var[1][2] -= tempdepletion
+                        splits, ball1['edx'], ball1['edy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
+                        ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
+                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], num=num, duoAttk=1)
 
-                        var[1][0] = -var[1][0]
-                        var[1][1] = -var[1][1]
-                        ball1['edx'] = -ball1['edx']
-                        ball1['edy'] = -ball1['edy']
-
-                        var[1][2] = var[1][2] / 2
-                        if var[1][2] <= 0:
-                            canvas.delete(var[0])
-                        splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-var[1][0],-var[1][1],var[1][2]]])
 
             if var[1][2] > 175:
                 var[1][2] = 175
@@ -151,63 +110,21 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     pos2 = canvas.coords(ball2['shape'])
     try:
         if (pos1[2] >= pos2[0] and pos1[0] <= pos2[2] and pos1[3] >= pos2[1] and pos1[1] <= pos2[3]):
-            ball2depletion = ball1['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-            ball1depletion = ball2['damage']*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-            ball1['hp'] -= ball1depletion
-            ball2['hp'] -= ball2depletion
-
-            if ball1['type'] == 'vampire':
-                ball1['hp'] += (0.25*ball2depletion)
-            elif ball2['type'] == 'vampire':
-                ball2['hp'] += (0.25*ball1depletion)
-
-            if ball1['type'] == 'splitting':
-                ball1['hp'] = ball1['hp'] / 2
-                if ball1['hp'] <= 0:
-                    canvas.delete(ball1['shape'])
-                splits.append([canvas.create_oval(pos1[0], pos1[1], pos1[2], pos1[3], fill='red'),[-ball1['dx'],-ball1['dy'],ball1['hp']]])
-            if ball2['type'] == 'splitting':
-                ball2['hp'] = ball2['hp'] / 2
-                if ball2['hp'] <= 0:
-                    canvas.delete(ball2['shape'])
-                splits.append([canvas.create_oval(pos2[0], pos2[1], pos2[2], pos2[3], fill='blue'),[-ball2['dx'],-ball2['dy'],ball2['hp']]])
-
-            ball1['dx'] = -ball1['dx']
-            ball1['dy'] = -ball1['dy']
-            ball2['dx'] = -ball2['dx']
-            ball2['dy'] = -ball2['dy']
+            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+            ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
+            ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'])
 
         if ball1['type'] == 'duo':
             if (pos2[2] >= duoAttkPos[0] and pos2[0] <= duoAttkPos[2] and pos2[3] >= duoAttkPos[1] and pos2[1] <= duoAttkPos[3]):
-                ball2depletion = 10*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                ball2['hp'] -= ball2depletion
-
-                if ball2['type'] == 'splitting':
-                    ball2['hp'] = ball2['hp'] / 2
-                    if ball2['hp'] <= 0:
-                        canvas.delete(ball2['shape'])
-                    splits.append([canvas.create_oval(pos2[0], pos2[1], pos2[2], pos2[3], fill='blue'),[-ball2['dx'],-ball2['dy'],ball2['hp']]])
-
-                ball2['dx'] = -ball2['dx']
-                ball2['dy'] = -ball2['dy']
-                ball1['edx'] = -ball1['edx']
-                ball1['edy'] = -ball1['edy']
+                splits, ball1['edx'], ball1['edy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+                ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
+                ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], duoAttk=1)
 
         elif ball2['type'] == 'duo':
             if (pos1[2] >= duoAttkPos[0] and pos1[0] <= duoAttkPos[2] and pos1[3] >= duoAttkPos[1] and pos1[1] <= duoAttkPos[3]):
-                ball1depletion = 10*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-                ball1['hp'] -= ball1depletion
-        
-                if ball1['type'] == 'splitting':
-                    ball1['hp'] = ball1['hp'] / 2
-                    if ball1['hp'] <= 0:
-                        canvas.delete(ball1['shape'])
-                    splits.append([canvas.create_oval(pos1[0], pos1[1], pos1[2], pos1[3], fill='red'),[-ball1['dx'],-ball1['dy'],ball1['hp']]])
-        
-                ball1['dx'] = -ball1['dx']
-                ball1['dy'] = -ball1['dy']
-                ball2['edx'] = -ball2['edx']
-                ball2['edy'] = -ball2['edy']
+                splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
+                ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
+                ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], duoAttk=2)
     except IndexError: None
 
 
