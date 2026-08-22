@@ -22,13 +22,16 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
         o1hp = o1hp / 2
         if o1hp <= 0:
             canvas.delete(o1)
-            splits.pop(num)
+            if num != None:
+                splits.pop(num)
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-o1dx,-o1dy,o1hp]])
     elif o2t == 'splitting':
         tempPos = canvas.coords(o2)
         o2hp = o2hp / 2
         if o2hp <= 0:
             canvas.delete(o2)
+            if num != None:
+                splits.pop(num)
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-o2dx,-o2dy,o2hp]])
 
 
