@@ -14,7 +14,7 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
 
     if o1t == 'vampire' and duoAttk != 2:
         o2hp += 0.25*o2depletion
-    elif o1t == 'vampire' and duoAttk != 1:
+    if o1t == 'vampire' and duoAttk != 1:
         o2hp += 0.25*o1depletion
 
     if o1t == 'splitting':
@@ -25,7 +25,7 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
             if num != None:
                 splits.pop(num)
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-o1dx,-o1dy,o1hp]])
-    elif o2t == 'splitting':
+    if o2t == 'splitting':
         tempPos = canvas.coords(o2)
         o2hp = o2hp / 2
         if o2hp <= 0:
@@ -35,9 +35,24 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-o2dx,-o2dy,o2hp]])
 
 
-    o1dx = -o1dx
-    o1dy = -o1dy
-    o2dx = -o2dx
-    o2dy = -o2dy
+    try:
+        pos1 = canvas.coords(o1)
+        pos2 = canvas.coords(o2)
+        dx = ((pos2[0] + pos2[1]) / 2) - ((pos1[0] + pos1[1]) / 2)
+        dy = ((pos2[2] + pos2[3]) / 2) - ((pos1[2] + pos1[3]) / 2)
+        preDir = [o1dx, o1dy, o2dx, o2dy]
+        if ((o1dx * dx) + (o1dy * dy)) > 0:
+            o1dx = preDir[2]
+            o1dy = preDir[3]
+        else:
+            o1dx = -o1dx
+            o1dy = -o1dy
+        if ((o2dx * (-dx)) + (o2dy * (-dy))) > 0:
+            o2dx = preDir[0]
+            o2dy = preDir[1]
+        else:
+            o2dx = -o2dx
+            o2dy = -o2dy
+    except IndexError: None
 
     return splits, o1dx, o1dy, o1hp, o2dx, o2dy, o2hp
