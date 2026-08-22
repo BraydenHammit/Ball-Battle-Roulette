@@ -61,7 +61,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
                     splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
                     var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
-                    ball2['shape'], ball2['type'], ball2['damage'], ball2['edx'], ball2['edy'], ball2['hp'], num=num)
+                    ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], num=num)
                 if ball2['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
                         splits, var[1][0], var[1][1], var[1][2], ball2['ex'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
