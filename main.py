@@ -54,7 +54,7 @@ def start_bet():
 
 
 def check_for_winner(winner):
-    global money, textboxW
+    global money, textboxW, canvas
     prevmoney = money
 
     if winner == 'ball1':
@@ -70,7 +70,8 @@ def check_for_winner(winner):
 
 
     healthbar1.pack_forget()
-    canvas.pack_forget()
+    canvas.destroy()
+    canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
     healthbar2.pack_forget()
     if winner == 'draw':
         textboxW = tk.Label(text=f'It was a draw.\nNo money was changed.',bg="#494949")
