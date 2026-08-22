@@ -4,8 +4,8 @@ def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
     while ball1type == ball2type:
-        ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo'])
-        ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo'])
+        ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie'])
+        ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie'])
 
 
 
@@ -103,6 +103,17 @@ def create_balls(canvas, root):
             'edx': temp_dx,
             'edy': 10 - temp_dx,
             'type': 'duo'
+        }
+    elif ball1type == 'zombie':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'hp': 10,
+            'max hp': 10,
+            'damage': 15,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'zombie'
         }
 
 
@@ -202,8 +213,17 @@ def create_balls(canvas, root):
             'edy': 10 - temp_dx,
             'type': 'duo'
         }
-
-
+    elif ball2type == 'zombie':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
+            'hp': 10,
+            'max hp': 10,
+            'damage': 15,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'zombie'
+        }
 
 
     

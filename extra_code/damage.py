@@ -3,9 +3,13 @@ import random as ran
 def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, num=None, duoAttk=None):
     o1depletion = o2d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     o2depletion = o1d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-    if duoAttk != 1:
+    if duoAttk != 1 and o1t == 'zombie':
+        o1hp -= 1
+    elif duoAttk != 1:
         o1hp -= o1depletion
-    if duoAttk != 2:
+    if duoAttk != 2 and o2t == 'zombie':
+        o2hp -= 1
+    elif duoAttk != 2:
         o2hp -= o2depletion
 
     if o1t == 'vampire' and duoAttk != 2:
