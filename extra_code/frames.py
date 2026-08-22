@@ -1,14 +1,14 @@
 import random as ran
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
     frm += 1
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
-    elif not ball1['hp'] <= 0:
+    elif (not ball1['hp'] <= 0) and (not ball1['type'] == 'zombie'):
         ball1['hp'] += ran.uniform(0.0,0.05)
     if ball2['type'] == 'healer':
         ball2['hp'] += ran.uniform(0.0,0.25)
-    elif not ball2['hp'] <= 0:
+    elif (not ball2['hp'] <= 0) and (not ball2['type'] == 'zombie'):
         ball2['hp'] += ran.uniform(0.0,0.05)
     canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
@@ -123,8 +123,6 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
             if var[1][2] > 175:
                 var[1][2] = 175
-
-
 
     if ball1['type'] == 'duo':
         canvas.move(ball1['extshape'],ball1['edx'],ball1['edy'])
@@ -242,4 +240,4 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.delete('all')
         checkforwinner(winner)
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=splits))

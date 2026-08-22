@@ -2,6 +2,7 @@ import tkinter as tk
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
+from extra_code.damage import dmg
 
 root = tk.Tk()
 root.title("Ball Battle Roulette")
@@ -102,7 +103,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=20)
                 
 
-                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0)
+                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg)
     except: None
 
 

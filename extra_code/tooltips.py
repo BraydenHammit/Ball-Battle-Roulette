@@ -43,4 +43,6 @@ def stats(type):
         text = 'HP: 30, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'
     elif type == 'duo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: One Attacking Ball With Infinite Health\n& One Defensive Ball That Deals No Damage\nLighter Color is Attack, Darker is Defense'
+    elif type == 'zombie':
+        text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage, But\nCannot Regen'
     return text
