@@ -46,4 +46,6 @@ def stats(type):
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: One Attacking Ball With Infinite Health\n& One Defensive Ball That Deals No Damage\nLighter Color is Attack, Darker is Defense'
     elif type == 'zombie':
         text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage, But Cannot Regen'
+    elif type == 'sentry':
+        text = 'HP: 10, Damage: 1, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
     return text

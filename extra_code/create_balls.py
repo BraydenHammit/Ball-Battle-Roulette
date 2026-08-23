@@ -3,9 +3,9 @@ import random as ran
 def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
-    while ball1type == ball2type:
-        ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie'])
-        ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie'])
+    while (ball1type == ball2type) and ((ball1type,ball2type != 'sentry splitting') and (ball1type,ball2type != 'splitting sentry')):
+        ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry'])
+        ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry'])
 
 
 
@@ -115,6 +115,19 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'zombie'
         }
+    elif ball1type == 'sentry':
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'extshape': canvas.create_oval(20, 20, 40, 40, fill='red'),
+            'hp': 10,
+            'max hp': 10,
+            'damage': 0,
+            'dx': 0,
+            'dy': 0,
+            'edx': 0,
+            'edy': 0,
+            'type': 'sentry'
+        }
 
 
 
@@ -223,6 +236,19 @@ def create_balls(canvas, root):
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'zombie'
+        }
+    elif ball2type == 'sentry':
+        ball2 = {
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
+            'extshape': canvas.create_oval(860, 560, 880, 580, fill='blue'),
+            'hp': 10,
+            'max hp': 10,
+            'damage': 0,
+            'dx': 0,
+            'dy': 0,
+            'edx': 0,
+            'edy': 0,
+            'type': 'sentry'
         }
 
 

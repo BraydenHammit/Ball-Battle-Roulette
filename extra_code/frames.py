@@ -1,7 +1,18 @@
 import random as ran
+import math as m
 
 def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
+
     frm += 1
+    if frm == 2:
+        if ball1['type'] == 'sentry':
+            x = [ran.uniform(0.0,canvas.winfo_width()),ran.uniform(0.0,canvas.winfo_height())]
+            y = [x[0] - 40, x[1] -40]
+            canvas.coords(ball1['shape'],x[0],x[1],y[0],y[1])
+        if ball2['type'] == 'sentry':
+            x = [ran.uniform(0.0,canvas.winfo_width()),ran.uniform(0.0,canvas.winfo_height())]
+            y = [x[0] - 40, x[1] -40]
+            canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
     elif (not ball1['hp'] <= 0) and (not ball1['type'] == 'zombie'):
@@ -10,14 +21,20 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         ball2['hp'] += ran.uniform(0.0,0.25)
     elif (not ball2['hp'] <= 0) and (not ball2['type'] == 'zombie'):
         ball2['hp'] += ran.uniform(0.0,0.05)
-    canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
-    canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
+    if ball1['type'] != 'sentry':
+        canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
+    if ball2['type'] != 'sentry':
+        canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     pos1 = canvas.coords(ball1['shape'])
     pos2 = canvas.coords(ball2['shape'])
     if ball1['type'] == 'duo':
         duoAttkPos = canvas.coords(ball1['extshape'])
     if ball2['type'] == 'duo':
         duoAttkPos = canvas.coords(ball2['extshape'])
+    if ball1['type'] == 'sentry':
+        sentryProjPos = canvas.coords(ball1['extshape'])
+    if ball2['type'] == 'sentry':
+        sentryProjPos = canvas.coords(ball2['extshape'])
 
     ball1Mult = ran.uniform(-0.5,0.5)
     ball2Mult = ran.uniform(-0.5,0.5)
@@ -46,7 +63,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                     splits.pop(num)
                 except: None
                 continue
-            var[1][2] += ran.uniform(0.0,0.05)
+            var[1][2] = min(var[1][2] + ran.uniform(0.0,0.05), 175)
             canvas.move(var[0],var[1][0],var[1][1])
             tempPos = canvas.coords(var[0])
             tempMult = ran.uniform(-0.5,0.5)
@@ -61,23 +78,23 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
                     splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
                     var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
-                    ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], num=num)
+                    ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], splitNum=num)
                 if ball2['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
                         splits, var[1][0], var[1][1], var[1][2], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
                         var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
-                        ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], num=num, duoAttk=2)
+                        ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], splitNum=num, duoAttk=2)
 
-            elif ball2['type'] == 'splitting':
+            if ball2['type'] == 'splitting':
                 if (tempPos[2] >= pos1[0] and tempPos[0] <= pos1[2] and tempPos[3] >= pos1[1] and tempPos[1] <= pos1[3]):
                     splits, ball1['dx'], ball1['dy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
                     ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
-                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], num=num)
+                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num)
                 if ball1['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
                         splits, ball1['edx'], ball1['edy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
                         ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
-                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], num=num, duoAttk=1)
+                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num, duoAttk=1)
 
 
             if var[1][2] > 175:
@@ -93,7 +110,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         if duoAttkPos[3] >= canvas.winfo_height() or duoAttkPos[1] <= 0:
             ball1['edy'] = -ball1['edy'] - tempMult
             ball1['edx'] += tempMult
-    elif ball2['type'] == 'duo':
+    if ball2['type'] == 'duo':
         canvas.move(ball2['extshape'],ball2['edx'],ball2['edy'])
         duoAttkPos = canvas.coords(ball2['extshape'])
         tempMult = ran.uniform(-0.5,0.5)
@@ -103,6 +120,45 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         if duoAttkPos[3] >= canvas.winfo_height() or duoAttkPos[1] <= 0:
             ball2['edy'] = -ball2['edy'] - tempMult
             ball2['edx'] += tempMult
+
+
+    if ball1['type'] == 'sentry':
+        sentryProjPos = canvas.coords(ball1['extshape'])
+        dx = ((pos2[0] + pos2[2]) / 2) - ((sentryProjPos[0] + sentryProjPos[2]) / 2)
+        dy = ((pos2[1] + pos2[3]) / 2) - ((sentryProjPos[1] + sentryProjPos[3]) / 2)
+        dis = m.sqrt(dx*dx + dy*dy)
+        ball1['edx'] = (dx / dis) * 10
+        ball1['edy'] = (dy / dis) * 10
+        canvas.move(ball1['extshape'],ball1['edx'],ball1['edy'])
+        sentryProjPos = canvas.coords(ball1['extshape'])
+
+        if (sentryProjPos[2] >= pos2[0] and sentryProjPos[0] <= pos2[2] and sentryProjPos[3] >= pos2[1] and sentryProjPos[1] <= pos2[3]):
+            splits, ball1['edx'], ball1['edy'], __, ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+            ball1['extshape'], 'sentry', 1, ball1['edx'], ball1['edy'], ball1['hp'],
+            ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], sentryProj=1, sentryBase=ball1['shape'])
+        elif ball2['type'] == 'duo' and (sentryProjPos[2] >= duoAttkPos[0] and sentryProjPos[0] <= duoAttkPos[2] and sentryProjPos[3] >= duoAttkPos[1] and sentryProjPos[1] <= duoAttkPos[3]):
+            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            ball1['extshape'], 'sentry', 1, ball1['edx'], ball1['edy'], ball1['hp'],
+            ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball1['shape'], duoAttk=2)
+    if ball2['type'] == 'sentry':
+        sentryProjPos = canvas.coords(ball2['extshape'])
+        dx = ((sentryProjPos[0] + sentryProjPos[2]) / 2) - ((pos1[0] + pos1[2]) / 2)
+        dy = ((sentryProjPos[1] + sentryProjPos[3]) / 2) - ((pos1[1] + pos1[3]) / 2)
+        dis = m.sqrt(dx*dx + dy*dy)
+        ball2['edx'] = (dx / dis) * 10
+        ball2['edy'] = (dy / dis) * 10
+        canvas.move(ball2['extshape'],ball2['edx'],ball2['edy'])
+        sentryProjPos = canvas.coords(ball2['extshape'])
+
+        if (sentryProjPos[2] >= pos2[0] and sentryProjPos[0] <= pos2[2] and sentryProjPos[3] >= pos2[1] and sentryProjPos[1] <= pos2[3]):
+            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dx'], ball1['hp'],
+            ball2['shape'], 'sentry', 1, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball2['shape'])
+        elif ball1['type'] == 'duo' and (sentryProjPos[2] >= duoAttkPos[0] and sentryProjPos[0] <= duoAttkPos[2] and sentryProjPos[3] >= duoAttkPos[1] and sentryProjPos[1] <= duoAttkPos[3]):
+            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edx'], None,
+            ball2['shape'], 'sentry', 1, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball2['shape'])
+
 
 
 
