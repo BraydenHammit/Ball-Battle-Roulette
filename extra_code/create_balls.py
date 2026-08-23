@@ -100,7 +100,7 @@ def create_balls(canvas, root):
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='dark red'),
-            'extshape': canvas.create_oval(10, 10, 50, 50, fill='pink'),
+            'extshape': canvas.create_oval(10, 10, 50, 50, fill="#ff6464"),
             'hp': 100,
             'max hp': 100,
             'damage': 0,
