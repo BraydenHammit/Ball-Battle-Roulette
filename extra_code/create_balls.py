@@ -3,9 +3,15 @@ import random as ran
 def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
-    while (ball1type == ball2type) and ((ball1type,ball2type != 'sentry splitting') and (ball1type,ball2type != 'splitting sentry')):
-        ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry'])
-        ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry'])
+    tries = 0
+    while (ball1type == ball2type) or ((ball1type == 'splitting' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitting')):
+        tries += 1
+        if tries >= 50:
+            ball1type = 'default'
+            ball2type = 'big'
+        else:
+            ball1type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry','black hole'])
+            ball2type = ran.choice(['default', 'big', 'fast', 'hyperspeed', 'vampire','splitting','healer','duo','zombie','sentry','black hole'])
 
 
 
@@ -128,6 +134,17 @@ def create_balls(canvas, root):
             'edy': 0,
             'type': 'sentry'
         }
+    elif ball1type == 'black hole':
+        temp_dx = ran.uniform(0.0, 1.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 100, 100, fill='dark red'),
+            'hp': 5,
+            'max hp': 5,
+            'damage': 1000000000000,
+            'dx': temp_dx,
+            'dy': 1 - temp_dx,
+            'type': 'black hole'
+        }
 
 
 
@@ -249,6 +266,17 @@ def create_balls(canvas, root):
             'edx': 0,
             'edy': 0,
             'type': 'sentry'
+        }
+    elif ball2type == 'black hole':
+        temp_dx = ran.uniform(0.0, 1.0)
+        ball2 = {
+            'shape': canvas.create_oval(800, 500, 890, 590, fill='navy'),
+            'hp': 5,
+            'max hp': 5,
+            'damage': 1000000000000,
+            'dx': temp_dx,
+            'dy': 1 - temp_dx,
+            'type': 'black hole'
         }
 
 
