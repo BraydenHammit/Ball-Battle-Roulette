@@ -1,17 +1,39 @@
 import tkinter as tk
+import platform as plt
+import subprocess as sp
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
 
+if plt.system() == 'Darwin':
+    syst = 'm' #MacBook
+elif plt.system() == 'Windows':
+    syst = 'w' #Windows
+else:
+    syst = 'o' #Other
+
 root = tk.Tk()
 root.title("Ball Battle Roulette")
 root.geometry("900x800")
 root.minsize(900, 800)
-try:
-    root.state('zoomed')
-except: None
 root.configure(bg="#393939")
+if syst != 'o':
+    try:
+        root.attributes('-fullscreen', True)
+    except:
+        root.state('zoomed')
+else: #Using codespace
+    root.update_idletasks()
+    width = root.winfo_width()
+    height = root.winfo_height()
+    screen_width = root.winfo_screenwidth()
+    screen_height = root.winfo_screenheight()
+    x = (screen_width // 2) - (width // 2)
+    y = (screen_height // 2) - (height // 2)
+    root.geometry(f"{width}x{height}+{x}+{y}")
+
+
 money = 100
 winner = None
 bet = [None,None]#       [Ball#,$$$] 
@@ -21,12 +43,37 @@ images = {
     'title': tk.PhotoImage(file='assets/images/title.png')
 }
 
+sounds = {
+    'bonk': 'assets/audio/bonk.mp3',
+    'pop': 'assets/audio/pop.mp3',
+    'click': 'assets/audio/click.mp3'
+}
+
+soundsPlaying = {
+    'bonk': None,
+    'pop': None,
+    'click': None
+}
 
 
+def play(f, t, v=1.0):  # (file, type, volume)
+    global soundsPlaying
+    if syst == "w":
+        cmd = f'(New-Object Media.SoundPlayer "{f}").Play();'
+        soundsPlaying[t] = sp.Popen(["powershell", "-WindowStyle", "Hidden", "-Command", cmd], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+    elif syst == "m":
+        appS = f'play alias (POSIX file "{f}")'
+        soundsPlaying[t] = sp.Popen(["afplay", "-v", str(v), appS], stdout=sp.DEVNULL, stderr=sp.DEVNULL, close_fds=True)
+
+def stopPlaying(t):
+    if t:            
+        t.terminate()
+    t = None         
 
 
 def start_bet():
     global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2
+    play(sounds['click'],soundsPlaying['click'])
     start_button.configure(highlightbackground="#494949")
     root.configure(bg="#494949")
     start_button.pack_forget()
@@ -90,6 +137,7 @@ def start(betNONGLOBAL):
     global money, bet, winner
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
+                play(sounds['click'],'click')
                 bet = [betNONGLOBAL,int(betting_enter.get())]
                 textbox1.pack_forget()
                 textbox2.pack_forget()
@@ -103,7 +151,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=20)
                 
 
-                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg, splits=[])
+                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg, play, sounds, splits=[])
     except: None
 
 
@@ -124,3 +172,6 @@ title.pack(pady=10)
 start_button.pack(pady=20)
 
 root.mainloop()
+stopPlaying(soundsPlaying['bonk'])
+stopPlaying(soundsPlaying['click'])
+stopPlaying(soundsPlaying['pop'])

@@ -1,6 +1,6 @@
 import random as ran
 
-def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
+def dmg(canvas, splits, frm, play, snds, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
     o1depletion = o2d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     o2depletion = o1d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     if o1t == 'zombie' and ((o2t != 'duo') or (duoAttk == 2)):
@@ -24,6 +24,7 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
             canvas.delete(o1)
             if splitNum != None and 0 <= splitNum < len(splits):
                 splits.pop(splitNum)
+                play(snds['pop'],'pop')
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-o1dx,-o1dy,o1hp]])
     if o2t == 'splitting':
         tempPos = canvas.coords(o2)
@@ -32,6 +33,7 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
             canvas.delete(o2)
             if splitNum != None and 0 <= splitNum < len(splits):
                 splits.pop(splitNum)
+                play(snds['pop'],'pop')
         splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-o2dx,-o2dy,o2hp]])
 
 
@@ -72,5 +74,7 @@ def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx,
     if sentryProj == 1:
         xy = canvas.coords(sentryBase)
         canvas.coords(o1,xy[0]+10,xy[1]+10,xy[2]-10,xy[3]-10)
+        play(snds['pop'],'pop')
 
+    play(snds['bonk'],'bonk')
     return splits, o1dx, o1dy, o1hp, o2dx, o2dy, o2hp

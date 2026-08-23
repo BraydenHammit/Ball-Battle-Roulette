@@ -1,7 +1,7 @@
 import random as ran
 import math as m
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, play, sounds, splits=[]):
 
     frm += 1
     if frm == 2:
@@ -76,23 +76,23 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
             if ball1['type'] == 'splitting':
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
-                    splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+                    splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
                     var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
                     ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], splitNum=num)
                 if ball2['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
-                        splits, var[1][0], var[1][1], var[1][2], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
+                        splits, var[1][0], var[1][1], var[1][2], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
                         var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
                         ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], splitNum=num, duoAttk=2)
 
             if ball2['type'] == 'splitting':
                 if (tempPos[2] >= pos1[0] and tempPos[0] <= pos1[2] and tempPos[3] >= pos1[1] and tempPos[1] <= pos1[3]):
-                    splits, ball1['dx'], ball1['dy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
+                    splits, ball1['dx'], ball1['dy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm, play, sounds,
                     ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
                     var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num)
                 if ball1['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
-                        splits, ball1['edx'], ball1['edy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm,
+                        splits, ball1['edx'], ball1['edy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(canvas, splits, frm, play, sounds,
                         ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
                         var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num, duoAttk=1)
 
@@ -133,11 +133,11 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         sentryProjPos = canvas.coords(ball1['extshape'])
 
         if (sentryProjPos[2] >= pos2[0] and sentryProjPos[0] <= pos2[2] and sentryProjPos[3] >= pos2[1] and sentryProjPos[1] <= pos2[3]):
-            splits, ball1['edx'], ball1['edy'], __, ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+            splits, ball1['edx'], ball1['edy'], __, ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
             ball1['extshape'], 'sentry', 1, ball1['edx'], ball1['edy'], ball1['hp'],
             ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], sentryProj=1, sentryBase=ball1['shape'])
         elif ball2['type'] == 'duo' and (sentryProjPos[2] >= duoAttkPos[0] and sentryProjPos[0] <= duoAttkPos[2] and sentryProjPos[3] >= duoAttkPos[1] and sentryProjPos[1] <= duoAttkPos[3]):
-            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm, play, sounds,
             ball1['extshape'], 'sentry', 1, ball1['edx'], ball1['edy'], ball1['hp'],
             ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball1['shape'], duoAttk=2)
     if ball2['type'] == 'sentry':
@@ -151,11 +151,11 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         sentryProjPos = canvas.coords(ball2['extshape'])
 
         if (sentryProjPos[2] >= pos2[0] and sentryProjPos[0] <= pos2[2] and sentryProjPos[3] >= pos2[1] and sentryProjPos[1] <= pos2[3]):
-            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm, play, sounds,
             ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dx'], ball1['hp'],
             ball2['shape'], 'sentry', 1, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball2['shape'])
         elif ball1['type'] == 'duo' and (sentryProjPos[2] >= duoAttkPos[0] and sentryProjPos[0] <= duoAttkPos[2] and sentryProjPos[3] >= duoAttkPos[1] and sentryProjPos[1] <= duoAttkPos[3]):
-            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm,
+            splits, ball1['edx'], ball1['edy'], __, ball2['edx'], ball2['edy'], _ = dmg(canvas, splits, frm, play, sounds,
             ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edx'], None,
             ball2['shape'], 'sentry', 1, ball2['edx'], ball2['edy'], None, sentryProj=1, sentryBase=ball2['shape'])
 
@@ -166,19 +166,19 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     pos2 = canvas.coords(ball2['shape'])
     try:
         if (pos1[2] >= pos2[0] and pos1[0] <= pos2[2] and pos1[3] >= pos2[1] and pos1[1] <= pos2[3]):
-            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+            splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
             ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
             ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'])
 
         if ball1['type'] == 'duo':
             if (pos2[2] >= duoAttkPos[0] and pos2[0] <= duoAttkPos[2] and pos2[3] >= duoAttkPos[1] and pos2[1] <= duoAttkPos[3]):
-                splits, ball1['edx'], ball1['edy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm,
+                splits, ball1['edx'], ball1['edy'], ball1['hp'], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
                 ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
                 ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], duoAttk=1)
 
         elif ball2['type'] == 'duo':
             if (pos1[2] >= duoAttkPos[0] and pos1[0] <= duoAttkPos[2] and pos1[3] >= duoAttkPos[1] and pos1[1] <= duoAttkPos[3]):
-                splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm,
+                splits, ball1['dx'], ball1['dy'], ball1['hp'], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(canvas, splits, frm, play, sounds,
                 ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
                 ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], duoAttk=2)
     except IndexError: None
@@ -213,4 +213,4 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.delete('all')
         checkforwinner(winner)
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, play, sounds, splits=splits))
