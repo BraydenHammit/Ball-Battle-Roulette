@@ -137,7 +137,7 @@ def create_balls(canvas, root):
     elif ball1type == 'black hole':
         temp_dx = ran.uniform(0.0, 1.0)
         ball1 = {
-            'shape': canvas.create_oval(10, 10, 100, 100, fill='dark red'),
+            'shape': canvas.create_oval(10, 10, 100, 100, fill="#1c0000"),
             'hp': 5,
             'max hp': 5,
             'damage': 1000000000000,
@@ -270,7 +270,7 @@ def create_balls(canvas, root):
     elif ball2type == 'black hole':
         temp_dx = ran.uniform(0.0, 1.0)
         ball2 = {
-            'shape': canvas.create_oval(800, 500, 890, 590, fill='navy'),
+            'shape': canvas.create_oval(800, 500, 890, 590, fill="#00071c"),
             'hp': 5,
             'max hp': 5,
             'damage': 1000000000000,
