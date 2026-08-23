@@ -81,7 +81,7 @@ def check_for_winner(winner):
     canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
     healthbar2.pack_forget()
     if winner == 'draw':
-        textboxW = tk.Label(text=f'It was a draw.\nNo money was changed.',bg="#494949")
+        textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
     else:
         textboxW = tk.Label(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.',bg="#494949")
     start_button.configure(text='Ok')
