@@ -45,15 +45,15 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     try:
         if pos1[2] >= canvas.winfo_width() or pos1[0] <= 0:
             if ball1['type'] == 'hyperspeed':
-                ball1['dx'] = -ball1['dx'] * 1.25
-                ball1['dy'] *= 1.25
+                ball1['dx'] = -ball1['dx'] * 1.05
+                ball1['dy'] *= 1.05
             else:
                 ball1['dx'] = -ball1['dx'] - ball1Mult
                 ball1['dy'] += ball1Mult
         if pos1[3] >= canvas.winfo_height() or pos1[1] <= 0:
             if ball1['type'] == 'hyperspeed':
-                ball1['dy'] = -ball1['dy'] * 1.25
-                ball1['dx'] *= 1.25
+                ball1['dy'] = -ball1['dy'] * 1.05
+                ball1['dx'] *= 1.05
             else:
                 ball1['dy'] = -ball1['dy'] - ball1Mult
                 ball1['dx'] += ball1Mult
@@ -61,19 +61,32 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     try:
         if pos2[2] >= canvas.winfo_width() or pos2[0] <= 0:
             if ball2['type'] == 'hyperspeed':
-                ball2['dx'] = -ball2['dx'] * 1.25
-                ball2['dy'] *= 1.25
+                ball2['dx'] = -ball2['dx'] * 1.05
+                ball2['dy'] *= 1.05
             else:
                 ball2['dx'] = -ball2['dx'] - ball2Mult
                 ball2['dy'] += ball2Mult
         if pos2[3] >= canvas.winfo_height() or pos2[1] <= 0:
             if ball2['type'] == 'hyperspeed':
-                ball2['dy'] = -ball2['dy'] * 1.25
-                ball2['dx'] *= 1.25
+                ball2['dy'] = -ball2['dy'] * 1.05
+                ball2['dx'] *= 1.05
             else:
                 ball2['dy'] = -ball2['dy'] - ball2Mult
                 ball2['dx'] += ball2Mult
     except IndexError: None
+
+    for d in [ball1['dx'],ball2['dx'],ball1['dy'],ball2['dy']]:
+        if d > 100:
+            d = 100
+
+    for c in canvas.coords(ball1['shape']):
+        if abs(c) >= 3000:
+            ball1['hp'] = 0
+    for c in canvas.coords(ball2['shape']):
+        if abs(c) >= 3000:
+            ball2['hp'] = 0
+
+
 
     if (ball1['type'] == 'splitting' or ball2['type'] == 'splitting') and splits != []:
         for num, var in enumerate(splits):
