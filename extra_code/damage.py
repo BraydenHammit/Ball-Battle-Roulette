@@ -3,11 +3,11 @@ import random as ran
 def dmg(canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
     o1depletion = o2d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     o2depletion = o1d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
-    if o1t == 'zombie':
+    if o1t == 'zombie' and ((o1t != 'duo') or (o1t == 'duo' and duoAttk == None)):
         o1hp -= 1
     elif duoAttk != 1 and sentryProj != 1:
         o1hp -= o1depletion
-    if o2t == 'zombie':
+    if o2t == 'zombie' and ((o2t != 'duo') or (o2t == 'duo' and duoAttk == None)):
         o2hp -= 1
     elif duoAttk != 2 and sentryProj != 2:
         o2hp -= o2depletion
