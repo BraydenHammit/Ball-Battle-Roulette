@@ -35,7 +35,7 @@ def stats(type):
     elif type == 'fast':
         text = 'HP: 75, Damage: 12, Velocity: 25,\nSpecial: N/A'
     elif type == 'hyperspeed':
-        text = 'HP: 25, Damage: 20, Velocity: 100,\nSpecial: N/A'
+        text = 'HP: 25, Damage: 22.5, Velocity: 25,\nSpecial: Speeds Up After Every Wall Bounce'
     elif type == 'vampire':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Spawn at 75 Health, Lifesteal 25% of Damage.'
     elif type == 'splitting':

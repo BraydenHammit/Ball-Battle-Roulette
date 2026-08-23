@@ -53,14 +53,14 @@ def create_balls(canvas, root):
             'type': 'fast'
         }
     elif ball1type == 'hyperspeed':
-        temp_dx = ran.uniform(0.0, 100.0)
+        temp_dx = ran.uniform(0.0, 25.0)
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
             'hp': 25,
             'max hp': 25,
-            'damage': 20,
+            'damage': 22.5,
             'dx': temp_dx,
-            'dy': 100 - temp_dx,
+            'dy': 25 - temp_dx,
             'type': 'hyperspeed'
         }
     elif ball1type == 'vampire':
@@ -186,14 +186,14 @@ def create_balls(canvas, root):
             'type': 'fast'
         }
     elif ball2type == 'hyperspeed':
-        temp_dx = ran.uniform(0.0, 100.0)
+        temp_dx = ran.uniform(0.0, 25.0)
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'hp': 25,
             'max hp': 25,
-            'damage': 20,
+            'damage': 22.5,
             'dx': temp_dx,
-            'dy': 100 - temp_dx,
+            'dy': 25 - temp_dx,
             'type': 'hyperspeed'
         }
     elif ball2type == 'vampire':

@@ -44,19 +44,35 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     ball2Mult = ran.uniform(-0.5,0.5)
     try:
         if pos1[2] >= canvas.winfo_width() or pos1[0] <= 0:
-            ball1['dx'] = -ball1['dx'] - ball1Mult
-            ball1['dy'] += ball1Mult
+            if ball1['type'] == 'hyperspeed':
+                ball1['dx'] = -ball1['dx'] * 1.25
+                ball1['dy'] *= 1.25
+            else:
+                ball1['dx'] = -ball1['dx'] - ball1Mult
+                ball1['dy'] += ball1Mult
         if pos1[3] >= canvas.winfo_height() or pos1[1] <= 0:
-            ball1['dy'] = -ball1['dy'] - ball1Mult
-            ball1['dx'] += ball1Mult
+            if ball1['type'] == 'hyperspeed':
+                ball1['dy'] = -ball1['dy'] * 1.25
+                ball1['dx'] *= 1.25
+            else:
+                ball1['dy'] = -ball1['dy'] - ball1Mult
+                ball1['dx'] += ball1Mult
     except IndexError: None
     try:
         if pos2[2] >= canvas.winfo_width() or pos2[0] <= 0:
-            ball2['dx'] = -ball2['dx'] - ball2Mult
-            ball2['dy'] += ball2Mult
+            if ball2['type'] == 'hyperspeed':
+                ball2['dx'] = -ball2['dx'] * 1.25
+                ball2['dy'] *= 1.25
+            else:
+                ball2['dx'] = -ball2['dx'] - ball2Mult
+                ball2['dy'] += ball2Mult
         if pos2[3] >= canvas.winfo_height() or pos2[1] <= 0:
-            ball2['dy'] = -ball2['dy'] - ball2Mult
-            ball2['dx'] += ball2Mult
+            if ball2['type'] == 'hyperspeed':
+                ball2['dy'] = -ball2['dy'] * 1.25
+                ball2['dx'] *= 1.25
+            else:
+                ball2['dy'] = -ball2['dy'] - ball2Mult
+                ball2['dx'] += ball2Mult
     except IndexError: None
 
     if (ball1['type'] == 'splitting' or ball2['type'] == 'splitting') and splits != []:
