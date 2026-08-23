@@ -103,7 +103,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=20)
                 
 
-                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg)
+                frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg, splits=[])
     except: None
 
 
