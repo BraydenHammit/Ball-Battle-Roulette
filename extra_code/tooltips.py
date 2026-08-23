@@ -47,5 +47,5 @@ def stats(type):
     elif type == 'zombie':
         text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage, But Cannot Regen'
     elif type == 'sentry':
-        text = 'HP: 10, Damage: 1, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
+        text = 'HP: 15, Damage: 1, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
     return text

@@ -119,8 +119,8 @@ def create_balls(canvas, root):
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
             'extshape': canvas.create_oval(20, 20, 40, 40, fill='red'),
-            'hp': 10,
-            'max hp': 10,
+            'hp': 15,
+            'max hp': 15,
             'damage': 0,
             'dx': 0,
             'dy': 0,
@@ -241,8 +241,8 @@ def create_balls(canvas, root):
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'extshape': canvas.create_oval(860, 560, 880, 580, fill='blue'),
-            'hp': 10,
-            'max hp': 10,
+            'hp': 15,
+            'max hp': 15,
             'damage': 0,
             'dx': 0,
             'dy': 0,
