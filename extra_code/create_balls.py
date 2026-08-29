@@ -148,7 +148,7 @@ def create_balls(canvas, root):
     elif ball1type == 'echo':
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
-            'extshape': canvas.create_oval(10, 10, 50, 50, fill="#1c0000"),
+            'extshape': canvas.create_oval(10, 10, 50, 50, fill="black"),
             'shape': canvas.create_oval(10, 10, 50, 50, fill="red"),
             'prevpos': [10,10,50,50,temp_dx,10-temp_dx],
             'hp': 100,
@@ -294,7 +294,7 @@ def create_balls(canvas, root):
     elif ball2type == 'echo':
         temp_dx = ran.uniform(0.0, 10.0)
         ball2 = {
-            'extshape': canvas.create_oval(850, 550, 890, 590, fill="#00071c"),
+            'extshape': canvas.create_oval(850, 550, 890, 590, fill="black"),
             'shape': canvas.create_oval(850, 550, 890, 590, fill="blue"),
             'prevpos': [850, 550, 890, 590, temp_dx, 10-temp_dx],
             'hp': 100,
