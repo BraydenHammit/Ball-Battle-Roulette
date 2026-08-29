@@ -50,4 +50,6 @@ def stats(type):
         text = 'HP: 15, Damage: 3, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
     elif type == 'black hole':
         text = 'HP: 5, Damage: ∞, Velocity: 1,\nSpecial: Immune To Damage, Slowly Loses Health,\nLarger & Darker Circle'
+    elif type == 'echo':
+        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Rewinds To Echo When Hit,\nSets Echo Every 5 Seconds'
     return text

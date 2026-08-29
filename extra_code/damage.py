@@ -1,6 +1,6 @@
 import random as ran
 
-def dmg(root, canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
+def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
     o1depletion = o2d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     o2depletion = o1d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
     if o1t == 'zombie' and ((o2t != 'duo') or (duoAttk == 2)):
@@ -79,6 +79,13 @@ def dmg(root, canvas, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d,
         canvas.itemconfigure(o2, state='hidden')
         canvas.coords(o2,10000,10000,10040,10040)
         root.after(1000,lambda: sentry(canvas,o2,sentryBase))
+
+    if o1t == 'echo':
+        canvas.coords(o1,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
+        o1dx,o1dy = prevpos[4],prevpos[5]
+    if o2t == 'echo':
+        canvas.coords(o2,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
+        o2dx,o2dy = prevpos[4],prevpos[5]
 
     return splits, o1dx, o1dy, o1hp, o2dx, o2dy, o2hp
 
