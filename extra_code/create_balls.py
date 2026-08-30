@@ -4,7 +4,7 @@ def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
     tries = 0
-    while (ball1type == ball2type) or ((ball1type == 'splitting' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitting')):
+    while (ball1type == ball2type) or ((ball1type == 'splitting' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitting')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')):
         tries += 1
         if tries >= 50:
             ball1type = 'default'
