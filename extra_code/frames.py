@@ -13,6 +13,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             x = [ran.uniform(0.0,canvas.winfo_width()),ran.uniform(0.0,canvas.winfo_height())]
             y = [x[0] - 40, x[1] -40]
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
+
     if ball1['type'] == 'echo':
         if frm % 313 == 0:
             ball1['prevpos'] = canvas.coords(ball1['shape'])
@@ -27,6 +28,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['prevpos'].append(ball2['dy'])
             canvas.coords(ball2['extshape'],ball2['prevpos'][0],ball2['prevpos'][1],ball2['prevpos'][2],ball2['prevpos'][3])
         prps = ball2['prevpos']
+        
     if ball1['type'] == 'chaser':
         pos = canvas.coords(ball1['shape'])
         cx = (pos[0] + pos[2]) / 2
@@ -57,6 +59,24 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['dx'] = 0
             ball2['dy'] = 0
         canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
+
+    if ball1['type'] == 'ghost':
+        if canvas.ghostinvince == None:
+            canvas.ghostinvince = 0
+        if canvas.ghostinvince > 0:
+            canvas.ghostinvince -= 1
+            canvas.itemconfigure(ball1['shape'],fill="#9d7474")
+        else:
+            canvas.itemconfigure(ball1['shape'],fill='red')
+    if ball2['type'] == 'ghost':
+        if canvas.ghostinvince == None:
+            canvas.ghostinvince = 0
+        if canvas.ghostinvince > 0:
+            canvas.ghostinvince -= 1
+            canvas.itemconfigure(ball2['shape'],fill="#74799d")
+        else:
+            canvas.itemconfigure(ball2['shape'],fill='blue')
+
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
     elif ball1['type'] == 'black hole':
@@ -69,6 +89,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         ball2['hp'] -= ran.uniform(0.0,0.025)
     elif (not ball2['hp'] <= 0) and (not ball2['type'] == 'zombie'):
         ball2['hp'] += ran.uniform(0.0,0.05)
+
     if ball1['type'] not in ('sentry','chaser'):
         canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     if ball2['type'] not in ('sentry','chaser'):

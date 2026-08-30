@@ -81,6 +81,7 @@ def check_for_winner(winner):
     canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
     canvas.mx = 0
     canvas.my = 0
+    canvas.ghostinvince = None
     canvas.bind("<Motion>", update_mouse)
     healthbar2.pack_forget()
     if winner == 'draw':
@@ -127,6 +128,7 @@ def update_mouse(event):
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
 canvas.mx = 0
 canvas.my = 0
+canvas.ghostinvince = None
 canvas.bind("<Motion>", update_mouse)
 start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
 roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949")

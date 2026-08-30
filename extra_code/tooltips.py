@@ -45,13 +45,15 @@ def stats(t):
     elif t == 'duo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: One Attacking Ball With Infinite Health\n& One Defensive Ball That Deals No Damage\nLighter Color is Attack, Darker is Defense'
     elif t == 'zombie':
-        text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage, But Cannot Regen'
+        text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage,\nBut Cannot Regen'
     elif t == 'sentry':
         text = 'HP: 15, Damage: 3, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
     elif t == 'black hole':
-        text = 'HP: 5, Damage: ∞, Velocity: 1,\nSpecial: Immune To Damage, Slowly Loses Health,\nLarger & Darker Circle'
+        text = 'HP: 5, Damage: ∞, Velocity: 1,\nSpecial: Immune To Damage,\nSlowly Loses Health,\nLarger & Darker Circle'
     elif t == 'echo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Rewinds To Echo When Hit,\nSets Echo Every 5 Seconds'
     elif t == 'chaser':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Follows Mouse Pointer'
+    elif t == 'ghost':
+        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Invincible For 3 Seconds\nWhen Hit'
     return text
