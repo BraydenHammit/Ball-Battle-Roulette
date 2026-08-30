@@ -27,6 +27,36 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['prevpos'].append(ball2['dy'])
             canvas.coords(ball2['extshape'],ball2['prevpos'][0],ball2['prevpos'][1],ball2['prevpos'][2],ball2['prevpos'][3])
         prps = ball2['prevpos']
+    if ball1['type'] == 'chaser':
+        pos = canvas.coords(ball1['shape'])
+        cx = (pos[0] + pos[2]) / 2
+        cy = (pos[1] + pos[3]) / 2
+        dx = canvas.mx - cx
+        dy = canvas.my - cy
+        dis = m.sqrt(dx*dx + dy*dy)
+        if dis > 0:
+            step = min(10, dis)
+            ball1['dx'] = (dx / dis) * step
+            ball1['dy'] = (dy / dis) * step
+        else:
+            ball1['dx'] = 0
+            ball1['dy'] = 0
+        canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
+    elif ball2['type'] == 'chaser':
+        pos = canvas.coords(ball2['shape'])
+        cx = (pos[0] + pos[2]) / 2
+        cy = (pos[1] + pos[3]) / 2
+        dx = canvas.mx - cx
+        dy = canvas.my - cy
+        dis = m.sqrt(dx*dx + dy*dy)
+        if dis > 0:
+            step = min(10, dis)
+            ball2['dx'] = (dx / dis) * step
+            ball2['dy'] = (dy / dis) * step
+        else:
+            ball2['dx'] = 0
+            ball2['dy'] = 0
+        canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
     elif ball1['type'] == 'black hole':
@@ -39,9 +69,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         ball2['hp'] -= ran.uniform(0.0,0.025)
     elif (not ball2['hp'] <= 0) and (not ball2['type'] == 'zombie'):
         ball2['hp'] += ran.uniform(0.0,0.05)
-    if ball1['type'] != 'sentry':
+    if ball1['type'] not in ('sentry','chaser'):
         canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
-    if ball2['type'] != 'sentry':
+    if ball2['type'] not in ('sentry','chaser'):
         canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     pos1 = canvas.coords(ball1['shape'])
     pos2 = canvas.coords(ball2['shape'])
@@ -61,14 +91,14 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             if ball1['type'] == 'hyperspeed':
                 ball1['dx'] = -ball1['dx'] * 1.05
                 ball1['dy'] *= 1.05
-            else:
+            elif ball1['type'] != 'chaser':
                 ball1['dx'] = -ball1['dx'] - ball1Mult
                 ball1['dy'] += ball1Mult
         if pos1[3] >= canvas.winfo_height() or pos1[1] <= 0:
             if ball1['type'] == 'hyperspeed':
                 ball1['dy'] = -ball1['dy'] * 1.05
                 ball1['dx'] *= 1.05
-            else:
+            elif ball1['type'] != 'chaser':
                 ball1['dy'] = -ball1['dy'] - ball1Mult
                 ball1['dx'] += ball1Mult
     except IndexError: None

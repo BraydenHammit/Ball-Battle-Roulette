@@ -27,29 +27,31 @@ class toolTip:
             self.tooltip = None
 
 
-def stats(type):
-    if type == 'default':
+def stats(t):
+    if t == 'default':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: N/A'
-    elif type == 'big':
+    elif t == 'big':
         text = 'HP: 150, Damage: 7.5, Velocity: 5,\nSpecial: Double Size Circle'
-    elif type == 'fast':
+    elif t == 'fast':
         text = 'HP: 75, Damage: 12, Velocity: 25,\nSpecial: N/A'
-    elif type == 'hyperspeed':
+    elif t == 'hyperspeed':
         text = 'HP: 25, Damage: 22.5, Velocity: 25,\nSpecial: Speeds Up After Every Wall Bounce'
-    elif type == 'vampire':
+    elif t == 'vampire':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Spawn at 75 Health, Lifesteal 25% of Damage.'
-    elif type == 'splitting':
+    elif t == 'splitting':
         text = 'HP: 175, Damage: 2.5, Velocity:10,\nSpecial: Splits in Two Every Hit'
-    elif type == 'healer':
+    elif t == 'healer':
         text = 'HP: 30, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'
-    elif type == 'duo':
+    elif t == 'duo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: One Attacking Ball With Infinite Health\n& One Defensive Ball That Deals No Damage\nLighter Color is Attack, Darker is Defense'
-    elif type == 'zombie':
+    elif t == 'zombie':
         text = 'HP: 10, Damage: 15, Velocity: 10,\nSpecial: Always Takes 1 Damage, But Cannot Regen'
-    elif type == 'sentry':
+    elif t == 'sentry':
         text = 'HP: 15, Damage: 3, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
-    elif type == 'black hole':
+    elif t == 'black hole':
         text = 'HP: 5, Damage: ∞, Velocity: 1,\nSpecial: Immune To Damage, Slowly Loses Health,\nLarger & Darker Circle'
-    elif type == 'echo':
+    elif t == 'echo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Rewinds To Echo When Hit,\nSets Echo Every 5 Seconds'
+    elif t == 'chaser':
+        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Follows Mouse Pointer'
     return text
