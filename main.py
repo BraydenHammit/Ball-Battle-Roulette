@@ -1,9 +1,11 @@
+#Imports
 import tkinter as tk
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
 
+#Basic Variables
 root = tk.Tk()
 root.title("Ball Battle Roulette")
 root.geometry("900x800")
@@ -17,15 +19,14 @@ rounds = 0
 winner = None
 bet = [None,None]#       [Ball#,$$$] 
 
-
 images = {
     'title': tk.PhotoImage(file='assets/images/title.png')
 }
 
+#---------------------------------------------------------------------------------------------------
 
 
-
-
+#Open Betting Screen
 def start_bet():
     global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds
     rounds += 1
@@ -59,8 +60,8 @@ def start_bet():
     root.update_idletasks()
 
 
-
-def check_for_winner(winner):
+#After Round Finished
+def round_won(winner):
     global money, textboxW, canvas
     prevmoney = money
 
@@ -95,7 +96,7 @@ def check_for_winner(winner):
     root.update_idletasks()
      
 
-
+#Start Round
 def start(betNONGLOBAL):
     global money, bet, winner
     try:
@@ -116,11 +117,12 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=20)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, check_for_winner, 0, dmg, splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, splits=[]))
     except: None
 
+#---------------------------------------------------------------------------------------------------
 
-
+#TKinter Object Variables
 def update_mouse(event):
     canvas.mx = event.x
     canvas.my = event.y
@@ -144,7 +146,8 @@ textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: None', fg='red', bg="#4
 textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: None', fg='blue', bg="#494949")
 tooltip1 = toolTip(textbox1,None)
 tooltip2 = toolTip(textbox2,None)
+
+#Start Game
 title.pack(pady=10)
 start_button.pack(pady=20)
-
 root.mainloop()
