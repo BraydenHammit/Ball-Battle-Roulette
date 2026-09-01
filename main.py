@@ -1,11 +1,11 @@
-#Imports
+#Imports:
 import tkinter as tk
 from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
 
-#Basic Variables
+#Basic Variables:
 root = tk.Tk()
 root.title("Ball Battle Roulette")
 root.geometry("900x800")
@@ -26,7 +26,7 @@ images = {
 #---------------------------------------------------------------------------------------------------
 
 
-#Open Betting Screen
+#Open Betting Screen:
 def start_bet():
     global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds
     rounds += 1
@@ -60,7 +60,7 @@ def start_bet():
     root.update_idletasks()
 
 
-#After Round Finished
+#After Round Finished:
 def round_won(winner):
     global money, textboxW, canvas
     prevmoney = money
@@ -96,7 +96,7 @@ def round_won(winner):
     root.update_idletasks()
      
 
-#Start Round
+#Start Round:
 def start(betNONGLOBAL):
     global money, bet, winner
     try:
@@ -122,7 +122,7 @@ def start(betNONGLOBAL):
 
 #---------------------------------------------------------------------------------------------------
 
-#TKinter Object Variables
+#TKinter Object Variables:
 def update_mouse(event):
     canvas.mx = event.x
     canvas.my = event.y
@@ -147,7 +147,7 @@ textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: None', fg='blue', bg="#
 tooltip1 = toolTip(textbox1,None)
 tooltip2 = toolTip(textbox2,None)
 
-#Start Game
+#Start Game:
 title.pack(pady=10)
 start_button.pack(pady=20)
 root.mainloop()

@@ -1,6 +1,7 @@
 import random as ran
 
 def create_balls(canvas, root):
+    #Random Classes:
     ball1type = 0
     ball2type = 0
     tries = 0
@@ -15,10 +16,10 @@ def create_balls(canvas, root):
 
 
 
+#---------------------------------------------------------------------------------------------------
 
 
-
-
+    #Ball 1 Defining:
     if ball1type == 'default':
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
@@ -193,10 +194,10 @@ def create_balls(canvas, root):
 
 
 
+#---------------------------------------------------------------------------------------------------
 
 
-
-
+    #Ball 2 Defining:
     if ball2type == 'default':
         temp_dx = ran.uniform(0.0, 10.0)
         ball2 = {
@@ -368,5 +369,8 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'looper'
         }
+
+
+
     
     return ball1, ball2
