@@ -10,8 +10,8 @@ def create_balls(canvas, root):
             ball1type = 'default'
             ball2type = 'big'
         else:
-            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost'])
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost'])
+            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])      #Classes
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])
 
 
 
@@ -179,6 +179,17 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'ghost'
         }
+    if ball1type == 'looper':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'hp': 100,
+            'max hp': 100,
+            'damage': 10,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'looper'
+        }
 
 
 
@@ -345,6 +356,17 @@ def create_balls(canvas, root):
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'ghost'
+        }
+    if ball2type == 'looper':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
+            'hp': 100,
+            'max hp': 100,
+            'damage': 10,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'looper'
         }
     
     return ball1, ball2

@@ -1,6 +1,27 @@
 import random as ran
 import math as m
 
+def wrap_ball(canvas, shape):
+    x1, y1, x2, y2 = canvas.coords(shape)
+    cx = (x1 + x2) / 2
+    cy = (y1 + y2) / 2
+    r = (x2 - x1) / 2
+    w = canvas.winfo_width()
+    h = canvas.winfo_height()
+
+    if cx > w + r:
+        cx = -r
+    elif cx < -r:
+        cx = w + r
+    if cy > h + r:
+        cy = -r
+    elif cy < -r:
+        cy = h + r
+
+    canvas.coords(shape, cx - r, cy - r, cx + r, cy + r)
+
+
+
 def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
     prps = None
     frm += 1
@@ -112,6 +133,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             if ball1['type'] == 'hyperspeed':
                 ball1['dx'] = -ball1['dx'] * 1.05
                 ball1['dy'] *= 1.05
+            elif ball1['type'] == 'looper':
+                wrap_ball(canvas, ball1['shape'])
             elif ball1['type'] != 'chaser':
                 ball1['dx'] = -ball1['dx'] - ball1Mult
                 ball1['dy'] += ball1Mult
@@ -119,6 +142,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             if ball1['type'] == 'hyperspeed':
                 ball1['dy'] = -ball1['dy'] * 1.05
                 ball1['dx'] *= 1.05
+            elif ball1['type'] == 'looper':
+                wrap_ball(canvas,ball1['shape'])
             elif ball1['type'] != 'chaser':
                 ball1['dy'] = -ball1['dy'] - ball1Mult
                 ball1['dx'] += ball1Mult
@@ -128,14 +153,18 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             if ball2['type'] == 'hyperspeed':
                 ball2['dx'] = -ball2['dx'] * 1.05
                 ball2['dy'] *= 1.05
-            else:
+            elif ball2['type'] == 'looper':
+                wrap_ball(canvas, ball2['shape'])
+            elif ball2['type'] != 'chaser':
                 ball2['dx'] = -ball2['dx'] - ball2Mult
                 ball2['dy'] += ball2Mult
         if pos2[3] >= canvas.winfo_height() or pos2[1] <= 0:
             if ball2['type'] == 'hyperspeed':
                 ball2['dy'] = -ball2['dy'] * 1.05
                 ball2['dx'] *= 1.05
-            else:
+            elif ball2['type'] == 'looper':
+                wrap_ball(canvas,ball2['shape'])   
+            elif ball2['type'] != 'chaser':
                 ball2['dy'] = -ball2['dy'] - ball2Mult
                 ball2['dx'] += ball2Mult
     except IndexError: None

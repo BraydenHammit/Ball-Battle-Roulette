@@ -56,4 +56,6 @@ def stats(t):
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Follows Mouse Pointer'
     elif t == 'ghost':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Invincible For 3 Seconds\nWhen Hit'
+    elif t == 'looper':
+        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Loops To Other Side Of Arena'
     return text
