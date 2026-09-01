@@ -1,6 +1,7 @@
 import random as ran
 import math as m
 
+#Looper Function:
 def wrap_ball(canvas, shape):
     x1, y1, x2, y2 = canvas.coords(shape)
     cx = (x1 + x2) / 2
@@ -25,6 +26,8 @@ def wrap_ball(canvas, shape):
 def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
     prps = None
     frm += 1
+
+    #Sentry Starting Random Position:
     if frm == 2:
         if ball1['type'] == 'sentry':
             x = [ran.uniform(0.0,canvas.winfo_width()),ran.uniform(0.0,canvas.winfo_height())]
@@ -35,6 +38,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             y = [x[0] - 40, x[1] -40]
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
 
+    #Echo Teleport Set:
     if ball1['type'] == 'echo':
         if frm % 313 == 0:
             ball1['prevpos'] = canvas.coords(ball1['shape'])
@@ -49,7 +53,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['prevpos'].append(ball2['dy'])
             canvas.coords(ball2['extshape'],ball2['prevpos'][0],ball2['prevpos'][1],ball2['prevpos'][2],ball2['prevpos'][3])
         prps = ball2['prevpos']
-        
+
+    #Chaser Movement:
     if ball1['type'] == 'chaser':
         pos = canvas.coords(ball1['shape'])
         cx = (pos[0] + pos[2]) / 2
@@ -81,6 +86,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['dy'] = 0
         canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
 
+    #Ghost Invincibility:
     if ball1['type'] == 'ghost':
         if canvas.ghostinvince == None:
             canvas.ghostinvince = 0
@@ -98,6 +104,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         else:
             canvas.itemconfigure(ball2['shape'],fill='blue')
 
+    #Healing:
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
     elif ball1['type'] == 'black hole':
@@ -111,6 +118,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     elif (not ball2['hp'] <= 0) and (not ball2['type'] == 'zombie'):
         ball2['hp'] += ran.uniform(0.0,0.05)
 
+    #Movement:
     if ball1['type'] not in ('sentry','chaser'):
         canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     if ball2['type'] not in ('sentry','chaser'):
@@ -126,6 +134,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     if ball2['type'] == 'sentry':
         sentryProjPos = canvas.coords(ball2['extshape'])
 
+    #Wall Bouncing:
     ball1Mult = ran.uniform(-0.5,0.5)
     ball2Mult = ran.uniform(-0.5,0.5)
     try:
@@ -169,10 +178,12 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball2['dx'] += ball2Mult
     except IndexError: None
 
+    #Terminal Velocity:
     for d in [ball1['dx'],ball2['dx'],ball1['dy'],ball2['dy']]:
         if d > 100:
             d = 100
 
+    #Too far out of bounds = DEATH:
     for c in canvas.coords(ball1['shape']):
         if abs(c) >= 3000:
             ball1['hp'] = 0
@@ -180,8 +191,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         if abs(c) >= 3000:
             ball2['hp'] = 0
 
+#---------------------------------------------------------------------------------------------------
 
-
+    #Splitting Loop:
     if (ball1['type'] == 'splitting' or ball2['type'] == 'splitting') and splits != []:
         for num, var in enumerate(splits):
             if var[1][2] <= 0:
@@ -227,6 +239,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             if var[1][2] > 175:
                 var[1][2] = 175
 
+#---------------------------------------------------------------------------------------------------
+
+    #Duo Attacking Ball:
     if ball1['type'] == 'duo':
         canvas.move(ball1['extshape'],ball1['edx'],ball1['edy'])
         duoAttkPos = canvas.coords(ball1['extshape'])
@@ -249,6 +264,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball2['edx'] += tempMult
 
 
+    #Sentry Projectile:
     if ball1['type'] == 'sentry':
         sentryProjPos = canvas.coords(ball1['extshape'])
         dx = ((pos2[0] + pos2[2]) / 2) - ((sentryProjPos[0] + sentryProjPos[2]) / 2)
@@ -286,9 +302,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edx'], None,
             ball2['extshape'], 'sentry', 3, ball2['edx'], ball2['edy'], None, duoAttk=1, sentryProj=2, sentryBase=ball2['shape'])
 
+#---------------------------------------------------------------------------------------------------
 
-
-
+    #Basic Ball Collisions:
     pos1 = canvas.coords(ball1['shape'])
     pos2 = canvas.coords(ball2['shape'])
     try:
@@ -311,6 +327,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     except IndexError: None
 
 
+    #HP Bar Updates:
     if ball1['hp'] > ball1['max hp']:
         ball1['hp'] = ball1['max hp']
     if ball2['hp'] > ball2['max hp']:
@@ -323,7 +340,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         healthbar2.configure(text=f'0/{ball2["max hp"]}')
 
 
-
+    #Check For Winner / Continue:
     if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')) and (ball2['hp'] <= 0) and (
     splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
         winner = "draw"
