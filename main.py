@@ -89,7 +89,11 @@ def round_won(winner):
         textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
     else:
         textboxW = tk.Label(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.',bg="#494949")
-    start_button.configure(text='Ok')
+    if money <= 0:
+        textboxW.configure(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.\n\nYou ran out of money and made some terrible gambling decisions.\n\nGoodbye.')
+        start_button.configure(text='Exit', command=lambda: root.destroy())
+    else:
+        start_button.configure(text='Ok')
     textboxW.pack(pady = 10)
     start_button.pack(pady = 10)
     winner = None
