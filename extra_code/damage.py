@@ -2,6 +2,7 @@ import random as ran
 
 def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, o2t, o2d, o2dx, o2dy, o2hp, splitNum=None, duoAttk=None, sentryProj=None, sentryBase=None):
     if canvas.ghostinvince is None or canvas.ghostinvince <= 0:
+        #Damage:
         o1depletion = o2d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
         o2depletion = o1d*(ran.uniform(0.05,2.5))*((frm/1200)+1)
         if o1t == 'zombie' and ((o2t != 'duo') or (duoAttk == 2)) and not ((o2t == 'sentry') and sentryProj == None):
@@ -13,11 +14,13 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
         elif o2t != 'black hole' and duoAttk != 2 and sentryProj != 2 and (o1t != 'duo' or duoAttk == 1):
             o2hp -= o2depletion
 
+        #Vampire Healing:
         if o1t == 'vampire' and duoAttk != 2 and sentryProj != 2:
             o1hp += 0.25*o2depletion
         if o2t == 'vampire' and duoAttk != 1 and sentryProj != 1:
             o2hp += 0.25*o1depletion
 
+        #Splitting Splits:
         if o1t == 'splitting' and len(splits) <= 15:
             tempPos = canvas.coords(o1)
             if o1hp <= 0:
@@ -38,6 +41,7 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
                 splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='blue'),[-o2dx,-o2dy,o2hp]])
 
 
+        #Sentry Teleportation:
         if (o1t == 'sentry' or o2t == 'sentry') and sentryProj == None:
             if o1t == 'sentry':
                 o2dx = -o2dx
@@ -51,6 +55,8 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
                 x = [ran.uniform(0.0,canvas.winfo_width()),ran.uniform(0.0,canvas.winfo_height())]
                 y = [x[0] - 40, x[1] -40]
                 canvas.coords(o2,x[0],x[1],y[0],y[1])
+
+        #Rebounding:
         else:
             try:
                 pos1 = canvas.coords(o1)
@@ -72,6 +78,7 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
                     o2dy = -o2dy
             except IndexError: None
 
+        #Sentry Projectile Cooldown:
         if sentryProj == 1:
             canvas.itemconfigure(o1, state='hidden')
             canvas.coords(o1,10000,10000,10040,10040)
@@ -81,6 +88,7 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
             canvas.coords(o2,10000,10000,10040,10040)
             root.after(1000,lambda: sentry(canvas,o2,sentryBase))
 
+        #Echo Teleportation:
         if o1t == 'echo':
             canvas.coords(o1,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
             o1dx,o1dy = prevpos[4],prevpos[5]
@@ -88,12 +96,17 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
             canvas.coords(o2,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
             o2dx,o2dy = prevpos[4],prevpos[5]
 
+        #Ghost Invincibility:
         if o1t == 'ghost' or o2t == 'ghost':
             canvas.ghostinvince = 186
 
     return splits, o1dx, o1dy, o1hp, o2dx, o2dy, o2hp
 
 
+
+
+
+#Return Projectile To Sentry:
 def sentry(c,o,b):
     try:
         c.itemconfigure(o, state='normal')

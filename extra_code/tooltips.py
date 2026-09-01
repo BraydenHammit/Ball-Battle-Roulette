@@ -1,5 +1,6 @@
 import tkinter as tk
 
+#Class:
 class toolTip:
     def __init__(self, object, text):
         self.object = object
@@ -27,6 +28,8 @@ class toolTip:
             self.tooltip = None
 
 
+
+#Class Tooltip Text:
 def stats(t):
     if t == 'default':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: N/A'
