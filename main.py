@@ -10,9 +10,11 @@ root = tk.Tk()
 root.title("Ball Battle Roulette")
 root.geometry("900x800")
 root.minsize(900, 800)
-try:
-    root.state('zoomed')
-except: None
+try: root.attributes('-fullscreen',True)
+except: 
+    try:
+        root.state('zoomed')
+    except: None
 root.configure(bg="#393939")
 money = 100
 rounds = 0
@@ -143,8 +145,8 @@ betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
 betting_frame = tk.Frame(root, bg="#494949")
 betting_ok1 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 1', command = lambda: start('ball1'))
 betting_ok2 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
-healthbar1 = tk.Label(text=None,fg='red', bg="#494949")
-healthbar2 = tk.Label(text=None,fg='blue', bg="#494949")
+healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
+healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
 textbox_frame = tk.Frame(root, bg="#494949")
 textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: None', fg='red', bg="#494949")
 textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: None', fg='blue', bg="#494949")
