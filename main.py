@@ -4,6 +4,7 @@ from extra_code.create_balls import create_balls
 from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
+from extra_code.windows import InternalWindow
 
 #Basic Variables:
 root = tk.Tk()
@@ -58,6 +59,7 @@ def start_bet():
     betting_frame.pack(pady = 5)
     betting_ok1.pack(side=tk.LEFT, padx=5)
     betting_ok2.pack(side=tk.LEFT, padx=5)
+    shop_open.pack(pady=20)
 
     root.update_idletasks()
 
@@ -104,7 +106,7 @@ def round_won(winner):
 
 #Start Round:
 def start(betNONGLOBAL):
-    global money, bet, winner
+    global bet
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                 bet = [betNONGLOBAL,int(betting_enter.get())]
@@ -118,6 +120,7 @@ def start(betNONGLOBAL):
                 betting_frame.pack_forget()
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
+                shop_open.pack_forget()
                 healthbar1.pack(pady=20)
                 canvas.pack(expand=True, fill='none')
                 healthbar2.pack(pady=20)
@@ -148,10 +151,26 @@ betting_ok2 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball
 healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
 healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
 textbox_frame = tk.Frame(root, bg="#494949")
-textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: None', fg='red', bg="#494949")
-textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: None', fg='blue', bg="#494949")
+textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#494949")
+textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#494949")
 tooltip1 = toolTip(textbox1,None)
 tooltip2 = toolTip(textbox2,None)
+shop_open = tk.Button(root, highlightbackground="#494949", text='Shop', command = lambda: openShop())
+shop = tk.Label(root,text=None)
+shop.destroy()
+
+#---------------------------------------------------------------------------------------------------
+
+#Shop Window Functions:
+def openShop():
+    global shop
+    if not shop.winfo_exists():
+        shop = InternalWindow(root,'Shop',fncts=[updateMoney])
+
+def updateMoney():
+    textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
+
+#---------------------------------------------------------------------------------------------------
 
 #Start Game:
 title.pack(pady=10)
