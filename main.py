@@ -165,10 +165,10 @@ shop.destroy()
 def openShop():
     global shop
     if not shop.winfo_exists():
-        shop = InternalWindow(root,'Shop',fncts=[updateMoney])
+        shop = InternalWindow(root,'Shop')
 
-def updateMoney():
-    textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
+def roll():
+    None
 
 #---------------------------------------------------------------------------------------------------
 

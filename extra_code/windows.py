@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class InternalWindow(tk.Frame):
-    def __init__(self, parent, title, width=300, height=200, x=50, y=50, fncts=[]):
+    def __init__(self, parent, title, width=300, height=200, x=50, y=50):
         super().__init__(parent, bg="#626262", bd=2, relief="groove")
         
         self.parent = parent
@@ -25,8 +25,6 @@ class InternalWindow(tk.Frame):
     def _window_area(self):
         self.window = tk.Frame(self, bg="#626262")
         self.window.pack(fill="both", expand=True, padx=10, pady=10)
-        if self.title == 'Shop':
-            shop_setup(self)
 
     def _bindings(self):
         self.title_bar.bind("<Button-1>", self._sdrag)
@@ -40,10 +38,3 @@ class InternalWindow(tk.Frame):
         x = self.winfo_x() - self._drag_start_x + event.x
         y = self.winfo_y() - self._drag_start_y + event.y
         self.place(x=x, y=y)
-
-
-
-
-#Shop Window Setup:
-def shop_setup(shop):
-    None
