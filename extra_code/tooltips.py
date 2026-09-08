@@ -56,7 +56,7 @@ def stats(t):
     elif t == 'echo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Rewinds To Echo When Hit,\nSets Echo Every 5 Seconds'
     elif t == 'chaser':
-        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Follows Mouse Pointer'
+        text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Moves Directly To Other Ball'
     elif t == 'ghost':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Invincible For 3 Seconds\nWhen Hit'
     elif t == 'looper':

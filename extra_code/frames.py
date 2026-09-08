@@ -57,10 +57,13 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     #Chaser Movement:
     if ball1['type'] == 'chaser':
         pos = canvas.coords(ball1['shape'])
+        pos_ = canvas.coords(ball2['shape'])
         cx = (pos[0] + pos[2]) / 2
         cy = (pos[1] + pos[3]) / 2
-        dx = canvas.mx - cx
-        dy = canvas.my - cy
+        cx2 = (pos_[0] + pos_[2]) / 2
+        cy2 = (pos_[1] + pos_[3]) / 2
+        dx = cx2 - cx
+        dy = cy2 - cy
         dis = m.sqrt(dx*dx + dy*dy)
         if dis > 0:
             step = min(10, dis)
@@ -72,10 +75,13 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     elif ball2['type'] == 'chaser':
         pos = canvas.coords(ball2['shape'])
+        pos_ = canvas.coords(ball2['shape'])
         cx = (pos[0] + pos[2]) / 2
         cy = (pos[1] + pos[3]) / 2
-        dx = canvas.mx - cx
-        dy = canvas.my - cy
+        cx2 = (pos_[0] + pos_[2]) / 2
+        cy2 = (pos_[1] + pos_[3]) / 2
+        dx = cx2 - cx
+        dy = cy2 - cy
         dis = m.sqrt(dx*dx + dy*dy)
         if dis > 0:
             step = min(10, dis)

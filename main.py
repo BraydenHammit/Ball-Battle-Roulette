@@ -87,7 +87,6 @@ def round_won(winner):
     canvas.mx = 0
     canvas.my = 0
     canvas.ghostinvince = None
-    canvas.bind("<Motion>", update_mouse)
     healthbar2.pack_forget()
     if winner == 'draw':
         textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
@@ -132,15 +131,8 @@ def start(betNONGLOBAL):
 #---------------------------------------------------------------------------------------------------
 
 #TKinter Object Variables:
-def update_mouse(event):
-    canvas.mx = event.x
-    canvas.my = event.y
-
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
-canvas.mx = 0
-canvas.my = 0
 canvas.ghostinvince = None
-canvas.bind("<Motion>", update_mouse)
 start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
 roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949")
 title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)
