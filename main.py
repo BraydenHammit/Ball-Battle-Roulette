@@ -45,6 +45,8 @@ def start_bet():
     roundNum.configure(text=f'Round {rounds}:')
     textbox1.configure(text=f'(i) Ball 1: {ball1["type"].title()}', fg='red', bg="#494949")
     textbox2.configure(text=f'(i) Ball 2: {ball2["type"].title()}', fg='blue', bg="#494949")
+    classtextbox1.configure(text=ball1['type'].title())
+    classtextbox2.configure(text=ball2['type'].title())
     tooltip1.text=stats(ball1['type'])
     tooltip2.text=stats(ball2['type'])
     textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#494949")
@@ -88,6 +90,8 @@ def round_won(winner):
     canvas.my = 0
     canvas.ghostinvince = None
     healthbar2.pack_forget()
+    classtextbox1.pack_forget()
+    classtextbox2.pack_forget()
     if winner == 'draw':
         textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
     else:
@@ -109,6 +113,8 @@ def start(betNONGLOBAL):
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                 bet = [betNONGLOBAL,int(betting_enter.get())]
+                if shop.winfo_exists():
+                    shop.destroy()
                 roundNum.pack_forget()
                 textbox_frame.pack_forget()
                 textbox1.pack_forget()
@@ -120,9 +126,11 @@ def start(betNONGLOBAL):
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
                 shop_open.pack_forget()
-                healthbar1.pack(pady=20)
+                healthbar1.pack(pady=10)
+                classtextbox1.pack(pady=10)
                 canvas.pack(expand=True, fill='none')
-                healthbar2.pack(pady=20)
+                classtextbox2.pack(pady=10)
+                healthbar2.pack(pady=10)
                 
 
                 root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, splits=[]))
@@ -142,6 +150,8 @@ betting_ok1 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball
 betting_ok2 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
 healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
 healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
+classtextbox1 = tk.Label(text=None,fg='red', bg="#494949")
+classtextbox2 = tk.Label(text=None,fg='blue', bg="#494949")
 textbox_frame = tk.Frame(root, bg="#494949")
 textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#494949")
 textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#494949")
