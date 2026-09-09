@@ -45,8 +45,6 @@ def start_bet():
     roundNum.configure(text=f'Round {rounds}:')
     textbox1.configure(text=f'(i) Ball 1: {ball1["type"].title()}', fg='red', bg="#494949")
     textbox2.configure(text=f'(i) Ball 2: {ball2["type"].title()}', fg='blue', bg="#494949")
-    classtextbox1.configure(text=ball1['type'].title())
-    classtextbox2.configure(text=ball2['type'].title())
     tooltip1.text=stats(ball1['type'])
     tooltip2.text=stats(ball2['type'])
     textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#494949")
@@ -113,6 +111,12 @@ def start(betNONGLOBAL):
     try:
         if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                 bet = [betNONGLOBAL,int(betting_enter.get())]
+                if bet[0] == 'ball1':
+                    classtextbox1.configure(text=f'{ball1['type'].title()}\n\nBetting: FOR')
+                    classtextbox2.configure(text=f'Betting: AGAINST\n\n{ball2['type'].title()}')
+                elif bet[0] == 'ball2':
+                    classtextbox1.configure(text=f'{ball1['type'].title()}\n\nBetting: AGAINST')
+                    classtextbox2.configure(text=f'Betting: FOR\n\n{ball2['type'].title()}')
                 if shop.winfo_exists():
                     shop.destroy()
                 roundNum.pack_forget()
@@ -126,11 +130,11 @@ def start(betNONGLOBAL):
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
                 shop_open.pack_forget()
-                healthbar1.pack(pady=10)
-                classtextbox1.pack(pady=10)
+                healthbar1.pack(pady=2)
+                classtextbox1.pack(pady=2)
                 canvas.pack(expand=True, fill='none')
-                classtextbox2.pack(pady=10)
-                healthbar2.pack(pady=10)
+                classtextbox2.pack(pady=2)
+                healthbar2.pack(pady=2)
                 
 
                 root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, splits=[]))
