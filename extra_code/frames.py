@@ -75,7 +75,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.move(ball1['shape'], ball1['dx'], ball1['dy'])
     elif ball2['type'] == 'chaser':
         pos = canvas.coords(ball2['shape'])
-        pos_ = canvas.coords(ball2['shape'])
+        pos_ = canvas.coords(ball1['shape'])
         cx = (pos[0] + pos[2]) / 2
         cy = (pos[1] + pos[3]) / 2
         cx2 = (pos_[0] + pos_[2]) / 2
