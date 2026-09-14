@@ -1,5 +1,7 @@
 import random as ran
+import tkinter as tk
 import math as m
+import time as t
 
 #Looper Function:
 def wrap_ball(canvas, shape):
@@ -350,17 +352,40 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')) and (ball2['hp'] <= 0) and (
     splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
         winner = "draw"
-        canvas.delete('all')
-        checkforwinner(winner)
     elif (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')):
         winner = "ball2"
         healthbar1.configure(text=f'0/{ball1["max hp"]}')
-        canvas.delete('all')
-        checkforwinner(winner)
     elif (ball2['hp'] <= 0) and (splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
         winner = "ball1"
         healthbar2.configure(text=f'0/{ball2["max hp"]}')
-        canvas.delete('all')
-        checkforwinner(winner)
+    else: 
+        winner = None
+    if winner is not None:
+        cont = tk.Button(root, text='Continue', command=lambda: won(canvas, checkforwinner, winner, cont))
+        cont.pack(side=tk.LEFT)
+        root.update_idletasks()
+        if winner == 'ball1':
+            canvas.configure(bg="blue")
+            canvas.delete(ball2['shape'])
+            try:
+                if ball2['extshape'] is not None:
+                    canvas.delete(ball2['extshape'])
+            except KeyError: None
+        if winner == 'ball2':
+            canvas.configure(bg="red")
+            canvas.delete(ball1['shape'])
+            try:
+                if ball1['extshape'] is not None:
+                    canvas.delete(ball1['extshape'])
+            except KeyError: None
+        elif winner == 'draw':
+            canvas.delete('all')
+            canvas.configure(bg='purple')
+        root.after(250, lambda: won(canvas, checkforwinner, winner, cont))
     else:
         root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=splits))
+
+def won(canvas,checkforwinner,winner,self):
+    self.destroy()
+    canvas.delete('all')
+    checkforwinner(winner)
