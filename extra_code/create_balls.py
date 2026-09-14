@@ -117,7 +117,7 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
             'hp': 10,
             'max hp': 10,
-            'damage': 15,
+            'damage': 10,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'zombie'
@@ -295,7 +295,7 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'hp': 10,
             'max hp': 10,
-            'damage': 15,
+            'damage': 10,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'zombie'
