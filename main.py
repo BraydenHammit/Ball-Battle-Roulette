@@ -137,7 +137,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=2)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], splits=[]))
     except: None
 
 #---------------------------------------------------------------------------------------------------

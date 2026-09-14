@@ -25,7 +25,7 @@ def wrap_ball(canvas, shape):
 
 
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, splits=[]):
     prps = None
     frm += 1
 
@@ -352,6 +352,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')) and (ball2['hp'] <= 0) and (
     splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
         winner = "draw"
+        healthbar1.configure(text=f'0/{ball1["max hp"]}')
+        healthbar2.configure(text=f'0/{ball2["max hp"]}')
     elif (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')):
         winner = "ball2"
         healthbar1.configure(text=f'0/{ball1["max hp"]}')
@@ -362,7 +364,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         winner = None
     if winner is not None:
         cont = tk.Button(root, text='Continue', command=lambda: won(canvas, checkforwinner, winner, cont))
-        cont.pack(side=tk.LEFT)
+        clstxtbx[0].pack_forget()
+        clstxtbx[1].pack_forget()
+        cont.pack(side=tk.BOTTOM, pady=10)
         root.update_idletasks()
         if winner == 'ball1':
             canvas.configure(bg="blue")
@@ -381,9 +385,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         elif winner == 'draw':
             canvas.delete('all')
             canvas.configure(bg='purple')
-        root.after(250, lambda: won(canvas, checkforwinner, winner, cont))
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, splits=splits))
 
 def won(canvas,checkforwinner,winner,self):
     self.destroy()
