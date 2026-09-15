@@ -13,8 +13,7 @@ root.geometry("900x800")
 root.minsize(900, 800)
 try: root.attributes('-fullscreen',True)
 except: 
-    try:
-        root.state('zoomed')
+    try: root.state('zoomed')
     except: None
 root.configure(bg="#393939")
 money = 100
