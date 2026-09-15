@@ -2,6 +2,7 @@ import random as ran
 import tkinter as tk
 import math as m
 import time as t
+import platform as plt
 
 #Looper Function:
 def wrap_ball(canvas, shape):
@@ -364,8 +365,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         winner = None
     if winner is not None:
         cont = tk.Button(root, text='Continue', highlightbackground="#494949", command=lambda: won(canvas, checkforwinner, winner, cont))
-        clstxtbx[0].pack_forget()
-        clstxtbx[1].pack_forget()
+        if plt.system() == 'Linux':  
+            clstxtbx[0].pack_forget()
+            clstxtbx[1].pack_forget()
         cont.pack(side=tk.BOTTOM, pady=10)
         root.update_idletasks()
         if winner == 'ball1':
