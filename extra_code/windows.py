@@ -1,7 +1,7 @@
 import tkinter as tk
 
 class InternalWindow(tk.Frame):
-    def __init__(self, parent, title, width=300, height=200, x=50, y=50):
+    def __init__(self, parent, title, width=200, height=150, x=50, y=50):
         super().__init__(parent, bg="#626262", bd=2, relief="groove")
         
         self.parent = parent

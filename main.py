@@ -5,6 +5,7 @@ from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
 from extra_code.windows import InternalWindow
+import random as ran
 
 #Basic Variables:
 root = tk.Tk()
@@ -19,11 +20,15 @@ root.configure(bg="#393939")
 money = 100
 rounds = 0
 winner = None
+donations = 0
 bet = [None,None]#       [Ball#,$$$] 
 
 images = {
     'title': tk.PhotoImage(file='assets/images/title.png')
 }
+
+cos = []
+ucos = []
 
 #---------------------------------------------------------------------------------------------------
 
@@ -136,7 +141,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=2)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, splits=[]))
     except: None
 
 #---------------------------------------------------------------------------------------------------
@@ -168,13 +173,61 @@ shop.destroy()
 
 #Shop Window Functions:
 def openShop():
-    global shop
+    global shop, cosbutt, donbutt
     if not shop.winfo_exists():
         shop = InternalWindow(root,'Shop')
+        if ucos == []:
+            cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
+        else:
+            cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
+        donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
+        cosbutt.pack(expand=True)
+        donbutt.pack(expand=True)
 
 def roll():
-    None
+    global money, ucos, cos
+    if money > 150:
+        money -= 150
+        rollNum = ran.randint(0,(len(ucos))-1)
+        rolll = ucos[rollNum]
+        cos.append(rolll)
+        ucos.pop(rollNum)
+        cosbutt.configure(text=f'Rolled:\n{rolll.title()}')
+        textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
+        root.after(1000,resetRollTxt)
+        if ucos == []:
+            cosbutt.configure(command=None)
+        root.update_idletasks()
+    else:
+        cosbutt.configure(text='Cannot\nPurchase!',fg='red')
+        root.update_idletasks()
+        root.after(1000,resetRollTxt)
 
+def donate():
+    global money, donations, cos
+    if money > 1:
+        money -= 1
+        donations += 1
+        if donations >= 100 and 'donate' not in cos:
+            cos.append('donate')
+            roundNum.configure(fg="#7c820e")
+        textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
+        root.update_idletasks()
+    else:
+        donbutt.configure(text='Cannot\nPurchase!',fg='red')
+        root.update_idletasks()
+        root.after(1000,resetDonTxt)
+
+
+def resetRollTxt():
+    cosbutt.configure(text='Purchase Cosmetic\n$150',fg='black')
+    if ucos == []:
+        cosbutt.configure(text='All Cosmetics Unlocked,\nGreat Job I Suppose')
+    root.update_idletasks()
+
+def resetDonTxt():
+    donbutt.configure(text='Donate\n$1',fg='black')
+    
 #---------------------------------------------------------------------------------------------------
 
 #Start Game:

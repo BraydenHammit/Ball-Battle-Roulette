@@ -26,7 +26,7 @@ def wrap_ball(canvas, shape):
 
 
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, splits=[]):
     prps = None
     frm += 1
 
@@ -388,7 +388,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             canvas.delete('all')
             canvas.configure(bg='purple')
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, splits=splits))
 
 def won(canvas,checkforwinner,winner,self):
     self.destroy()
