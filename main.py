@@ -63,7 +63,8 @@ def start_bet():
     betting_frame.pack(pady = 5)
     betting_ok1.pack(side=tk.LEFT, padx=5)
     betting_ok2.pack(side=tk.LEFT, padx=5)
-    shop_open.pack(pady=20)
+    shopframe.pack(pady=20,side=tk.BOTTOM)
+    shop_open.pack(padx=10,side=tk.LEFT)
 
     root.update_idletasks()
 
@@ -134,6 +135,7 @@ def start(betNONGLOBAL):
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
                 shop_open.pack_forget()
+                shopframe.pack_forget()
                 healthbar1.pack(pady=2)
                 classtextbox1.pack(pady=2)
                 canvas.pack(expand=True, fill='none')
@@ -165,7 +167,8 @@ textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#49
 textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#494949")
 tooltip1 = toolTip(textbox1,None)
 tooltip2 = toolTip(textbox2,None)
-shop_open = tk.Button(root, highlightbackground="#494949", text='Shop', command = lambda: openShop())
+shopframe = tk.Frame(root, bg="#494949")
+shop_open = tk.Button(shopframe, highlightbackground="#494949", text='Shop', command = lambda: openShop())
 shop = tk.Label(root,text=None)
 shop.destroy()
 
@@ -180,7 +183,10 @@ def openShop():
             cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
         else:
             cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
-        donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
+        if 'donate' in cos:
+            donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number',highlightbackground="#494949",fg='black')
+        else:
+            donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
         cosbutt.pack(expand=True)
         donbutt.pack(expand=True)
 
@@ -211,6 +217,7 @@ def donate():
         if donations >= 100 and 'donate' not in cos:
             cos.append('donate')
             roundNum.configure(fg="#7c820e")
+            donbutt.configure(text='Secret Cosmetic Unlocked:\nGolden Round Number',command=None)
         textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
         root.update_idletasks()
     else:
