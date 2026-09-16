@@ -12,7 +12,7 @@ def create_balls(canvas, root):
             ball2type = 'big'
         else:
             ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])  #add  grower
 
 
 
@@ -90,8 +90,8 @@ def create_balls(canvas, root):
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
-            'hp': 30,
-            'max hp': 30,
+            'hp': 50,
+            'max hp': 50,
             'damage': 6.75,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
@@ -191,6 +191,17 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'looper'
         }
+    if ball1type == 'grower':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'hp': 75,
+            'max hp': 75,
+            'damage': 7.5,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'grower'
+        }
 
 
 
@@ -268,8 +279,8 @@ def create_balls(canvas, root):
         temp_dx = ran.uniform(0.0, 10.0)
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
-            'hp': 30,
-            'max hp': 30,
+            'hp': 50,
+            'max hp': 50,
             'damage': 6.75,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
@@ -368,6 +379,17 @@ def create_balls(canvas, root):
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'looper'
+        }
+    if ball2type == 'grower':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(860, 560, 890, 590, fill='blue'),
+            'hp': 75,
+            'max hp': 75,
+            'damage': 7.5,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'type': 'grower'
         }
 
 

@@ -113,6 +113,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         else:
             canvas.itemconfigure(ball2['shape'],fill='blue')
 
+    #Grower Growth:
+    if ball1['type'] == 'grower': None
+
     #Healing:
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)
