@@ -11,8 +11,8 @@ def create_balls(canvas, root):
             ball1type = 'default'
             ball2type = 'big'
         else:
-            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper'])  #add  grower
+            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])      #Classes
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])
 
 
 
