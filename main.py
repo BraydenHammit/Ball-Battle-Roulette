@@ -28,6 +28,7 @@ images = {
 }
 
 cos = []
+cosset = {}
 ucos = []
 
 #---------------------------------------------------------------------------------------------------
@@ -63,8 +64,7 @@ def start_bet():
     betting_frame.pack(pady = 5)
     betting_ok1.pack(side=tk.LEFT, padx=5)
     betting_ok2.pack(side=tk.LEFT, padx=5)
-    shopframe.pack(pady=20,side=tk.BOTTOM)
-    shop_open.pack(padx=10,side=tk.LEFT)
+    shop_open.pack(pady=20,side=tk.BOTTOM)
 
     root.update_idletasks()
 
@@ -135,7 +135,6 @@ def start(betNONGLOBAL):
                 betting_ok1.pack_forget()
                 betting_ok2.pack_forget()
                 shop_open.pack_forget()
-                shopframe.pack_forget()
                 healthbar1.pack(pady=2)
                 classtextbox1.pack(pady=2)
                 canvas.pack(expand=True, fill='none')
@@ -152,7 +151,7 @@ def start(betNONGLOBAL):
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
 canvas.ghostinvince = None
 start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
-roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949")
+roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')
 title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)
 betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
 betting_frame = tk.Frame(root, bg="#494949")
@@ -167,8 +166,7 @@ textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#49
 textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#494949")
 tooltip1 = toolTip(textbox1,None)
 tooltip2 = toolTip(textbox2,None)
-shopframe = tk.Frame(root, bg="#494949")
-shop_open = tk.Button(shopframe, highlightbackground="#494949", text='Shop', command = lambda: openShop())
+shop_open = tk.Button(root, highlightbackground="#494949", text='Shop', command = lambda: openShop())
 shop = tk.Label(root,text=None)
 shop.destroy()
 
@@ -179,24 +177,25 @@ def openShop():
     global shop, cosbutt, donbutt
     if not shop.winfo_exists():
         shop = InternalWindow(root,'Shop')
-        if ucos == []:
-            cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
-        else:
-            cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
+        #if ucos == []:
+        #    cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
+        #else:
+        #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
         if 'donate' in cos:
-            donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number',highlightbackground="#494949",fg='black')
+            donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
         else:
             donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
-        cosbutt.pack(expand=True)
+        #cosbutt.pack(expand=True)
         donbutt.pack(expand=True)
 
 def roll():
-    global money, ucos, cos
+    global money, ucos, cos, cosset
     if money > 150:
         money -= 150
         rollNum = ran.randint(0,(len(ucos))-1)
         rolll = ucos[rollNum]
         cos.append(rolll)
+        cosset[rolll] = True
         ucos.pop(rollNum)
         cosbutt.configure(text=f'Rolled:\n{rolll.title()}')
         textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
@@ -210,14 +209,15 @@ def roll():
         root.after(1000,resetRollTxt)
 
 def donate():
-    global money, donations, cos
+    global money, donations, cos, cosset
     if money > 1:
         money -= 1
         donations += 1
         if donations >= 100 and 'donate' not in cos:
             cos.append('donate')
+            cosset['donate'] = True
             roundNum.configure(fg="#7c820e")
-            donbutt.configure(text='Secret Cosmetic Unlocked:\nGolden Round Number',command=None)
+            donbutt.configure(text='Secret Cosmetic Unlocked:\nGolden Round Number',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
         textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
         root.update_idletasks()
     else:
@@ -233,7 +233,21 @@ def resetRollTxt():
     root.update_idletasks()
 
 def resetDonTxt():
-    donbutt.configure(text='Donate\n$1',fg='black')
+    if 'donate' not in cos:
+        donbutt.configure(text='Donate\n$1',fg='black')
+
+def setting(cosmetic,button):
+    global cosset
+    if cosset[cosmetic] == True: 
+        cosset[cosmetic] = False
+        button.configure(bg="#3C5F0C")
+        if cosmetic == 'donate':
+            roundNum.configure(fg='#7c820e')
+    elif cosset[cosmetic] == False:
+        cosset[cosmetic] = True
+        button.configure(bg="#CA1818")
+        if cosmetic == 'donate':
+            roundNum.configure(fg='#363636')
     
 #---------------------------------------------------------------------------------------------------
 
