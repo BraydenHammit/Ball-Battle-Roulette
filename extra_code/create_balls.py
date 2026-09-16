@@ -194,7 +194,7 @@ def create_balls(canvas, root):
     if ball1type == 'grower':
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
-            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'shape': canvas.create_oval(10, 10, 40, 40, fill='red'),
             'hp': 75,
             'max hp': 75,
             'damage': 7.5,
