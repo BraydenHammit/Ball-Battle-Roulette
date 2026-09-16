@@ -387,14 +387,16 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         cont.pack(side=tk.BOTTOM, pady=10)
         root.update_idletasks()
         if winner == 'ball1':
-            canvas.configure(bg="blue")
+            if 'bloodbath' in cos:
+                canvas.configure(bg="blue")
             canvas.delete(ball2['shape'])
             try:
                 if ball2['extshape'] is not None:
                     canvas.delete(ball2['extshape'])
             except KeyError: None
         if winner == 'ball2':
-            canvas.configure(bg="red")
+            if 'bloodbath' in cos:
+                canvas.configure(bg="red")
             canvas.delete(ball1['shape'])
             try:
                 if ball1['extshape'] is not None:
