@@ -17,7 +17,7 @@ except:
     try: root.state('zoomed')
     except: None
 root.configure(bg="#393939")
-money = 1000
+money = 100
 rounds = 0
 winner = None
 donations = 0
