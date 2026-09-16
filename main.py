@@ -17,7 +17,7 @@ except:
     try: root.state('zoomed')
     except: None
 root.configure(bg="#393939")
-money = 100
+money = 1000
 rounds = 0
 winner = None
 donations = 0
@@ -240,14 +240,14 @@ def setting(cosmetic,button):
     global cosset
     if cosset[cosmetic] == True: 
         cosset[cosmetic] = False
-        button.configure(bg="#3C5F0C")
-        if cosmetic == 'donate':
-            roundNum.configure(fg='#7c820e')
-    elif cosset[cosmetic] == False:
-        cosset[cosmetic] = True
         button.configure(bg="#CA1818")
         if cosmetic == 'donate':
             roundNum.configure(fg='#363636')
+    elif cosset[cosmetic] == False:
+        cosset[cosmetic] = True
+        button.configure(bg="#3C5F0C")
+        if cosmetic == 'donate':
+            roundNum.configure(fg='#7c820e')
     
 #---------------------------------------------------------------------------------------------------
 
