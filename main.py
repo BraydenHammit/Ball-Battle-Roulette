@@ -19,6 +19,7 @@ except:
 root.configure(bg="#393939")
 money = 100
 rounds = 0
+wins = 0
 winner = None
 donations = 0
 bet = [None,None]#       [Ball#,$$$] 
@@ -36,7 +37,7 @@ ucos = []
 
 #Open Betting Screen:
 def start_bet():
-    global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds
+    global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds, wins
     rounds += 1
     start_button.configure(highlightbackground="#494949")
     root.configure(bg="#494949")
@@ -77,11 +78,13 @@ def round_won(winner):
     if winner == 'ball1':
         if bet[0] == 'ball1':
             money += bet[1]
+            wins += 1
         else:
             money -= bet[1]
     elif winner == 'ball2':
         if bet[0] == 'ball2':
             money += bet[1]
+            wins += 1
         else:
             money -= bet[1]
 
