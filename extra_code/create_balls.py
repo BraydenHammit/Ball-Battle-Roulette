@@ -115,8 +115,8 @@ def create_balls(canvas, root):
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
-            'hp': 10,
-            'max hp': 10,
+            'hp': 5,
+            'max hp': 5,
             'damage': 10,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
@@ -306,8 +306,8 @@ def create_balls(canvas, root):
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'hp': 10,
-            'max hp': 10,
-            'damage': 10,
+            'max hp': 5,
+            'damage': 5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'zombie'

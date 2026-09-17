@@ -48,7 +48,7 @@ def stats(t):
     elif t == 'duo':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: One Attacking Ball With Infinite Health\n& One Defensive Ball That Deals No Damage\nLighter Color is Attack, Darker is Defense'
     elif t == 'zombie':
-        text = 'HP: 10, Damage: 10, Velocity: 10,\nSpecial: Always Takes 1 Damage,\nBut Cannot Regen'
+        text = 'HP: 5, Damage: 10, Velocity: 10,\nSpecial: Always Takes 1 Damage,\nBut Cannot Regen'
     elif t == 'sentry':
         text = 'HP: 15, Damage: 3, Velocity: 0,\nSpecial: Stationary, Teleports When Hit, Shoots Projectiles'
     elif t == 'black hole':
