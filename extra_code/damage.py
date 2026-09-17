@@ -94,9 +94,11 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
         if o1t == 'echo':
             canvas.coords(o1,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
             o1dx,o1dy = prevpos[4],prevpos[5]
+            canvas.echotp = True
         if o2t == 'echo':
             canvas.coords(o2,prevpos[0],prevpos[1],prevpos[2],prevpos[3])
             o2dx,o2dy = prevpos[4],prevpos[5]
+            canvas.echotp = True
 
         #Ghost Invincibility:
         if o1t == 'ghost' or o2t == 'ghost':

@@ -11,7 +11,7 @@ def create_balls(canvas, root):
             ball1type = 'default'
             ball2type = 'big'
         else:
-            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])      #Classes
+            ball1type = 'echo'#ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])      #Classes
             ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])
 
 
@@ -154,9 +154,10 @@ def create_balls(canvas, root):
             'prevpos': [10,10,50,50,temp_dx,10-temp_dx],
             'hp': 100,
             'max hp': 100,
-            'damage': 10,
+            'damage': 7.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
+            'timer': 0,
             'type': 'echo'
         }
     if ball1type == 'chaser':
@@ -343,9 +344,10 @@ def create_balls(canvas, root):
             'prevpos': [850, 550, 890, 590, temp_dx, 10-temp_dx],
             'hp': 100,
             'max hp': 100,
-            'damage': 10,
+            'damage': 7.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
+            'timer': 0,
             'type': 'echo'
         }
     if ball2type == 'chaser':

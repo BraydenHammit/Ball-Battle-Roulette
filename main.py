@@ -150,6 +150,7 @@ def start(betNONGLOBAL):
 #TKinter Object Variables:
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
 canvas.ghostinvince = None
+canvas.echotp = False
 start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
 roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')
 title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)

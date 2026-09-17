@@ -41,8 +41,17 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             y = [x[0] - 40, x[1] -40]
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
 
-    #Echo Teleport Set:
+    #Echo Shenanigans:
     if ball1['type'] == 'echo':
+        if canvas.echotp == True:
+            canvas.echotp = False
+            ball1['timer'] = 62
+        if ball1['timer'] > 0:
+            ball1['timer'] -= 1
+            ball1['damage'] = 15
+        else:
+            ball1['timer'] = 0
+            ball1['damage'] = 7.5
         if frm % 313 == 0:
             ball1['prevpos'] = canvas.coords(ball1['shape'])
             ball1['prevpos'].append(ball1['dx'])
@@ -50,6 +59,15 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             canvas.coords(ball1['extshape'],ball1['prevpos'][0],ball1['prevpos'][1],ball1['prevpos'][2],ball1['prevpos'][3])
         prps = ball1['prevpos']
     if ball2['type'] == 'echo':
+        if canvas.echotp == True:
+            canvas.echotp = False
+            ball2['timer'] = 62
+        if ball2['timer'] > 0:
+            ball2['timer'] -= 1
+            ball2['damage'] = 15
+        else:
+            ball2['timer'] = 0
+            ball2['damage'] = 7.5
         if frm % 313 == 0:
             ball2['prevpos'] = canvas.coords(ball2['shape'])
             ball2['prevpos'].append(ball2['dx'])
