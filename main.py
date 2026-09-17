@@ -37,7 +37,7 @@ ucos = []
 
 #Open Betting Screen:
 def start_bet():
-    global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds, wins
+    global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds
     rounds += 1
     start_button.configure(highlightbackground="#494949")
     root.configure(bg="#494949")
@@ -71,7 +71,7 @@ def start_bet():
 
 
 #After Round Finished:
-def round_won(winner):
+def round_won(winner, wins):
     global money, textboxW, canvas
     prevmoney = money
 
@@ -146,7 +146,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=2)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, wins, splits=[]))
     except: None
 
 #---------------------------------------------------------------------------------------------------
