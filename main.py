@@ -92,6 +92,7 @@ def round_won(winner):
     canvas.mx = 0
     canvas.my = 0
     canvas.ghostinvince = None
+    canvas.echotp = False
     healthbar2.pack_forget()
     classtextbox1.pack_forget()
     classtextbox2.pack_forget()
