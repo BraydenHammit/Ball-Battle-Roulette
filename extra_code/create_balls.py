@@ -247,8 +247,8 @@ def create_balls(canvas, root):
         temp_dx = ran.uniform(0.0, 25.0)
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
-            'hp': 25,
-            'max hp': 25,
+            'hp': 50,
+            'max hp': 50,
             'damage': 22.5,
             'dx': temp_dx,
             'dy': 25 - temp_dx,
