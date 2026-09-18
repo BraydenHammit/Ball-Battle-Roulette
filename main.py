@@ -186,11 +186,11 @@ def openShop():
         #    cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
         #else:
         #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
+        #cosbutt.pack(expand=True)
         if 'donate' in cos:
             donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
         else:
             donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
-        #cosbutt.pack(expand=True)
         donbutt.pack(expand=True)
 
 def roll():
