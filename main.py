@@ -94,9 +94,11 @@ def main(L=False, q=None):
 
         healthbar1.pack_forget()
         wins = canvas.wins
+        speed = canvas.gamespeed
         canvas.destroy()
         canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
         canvas.wins = wins
+        canvas.gamespeed = speed
         canvas.mx = 0
         canvas.my = 0
         canvas.ghostinvince = None
@@ -164,6 +166,7 @@ def main(L=False, q=None):
     canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
     canvas.ghostinvince = None
     canvas.wins = 0
+    canvas.gamespeed = 16
     canvas.echotp = False
     start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
     roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')

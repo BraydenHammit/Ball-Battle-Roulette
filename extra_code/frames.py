@@ -428,7 +428,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 if cosset['bloodbath'] == True:
                     canvas.configure(bg='purple')
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, cosset, splits=splits))
+        root.after(canvas.gamespeed, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, cosset, splits=splits))
 
 def won(canvas,checkforwinner,winner,self):
     self.destroy()
