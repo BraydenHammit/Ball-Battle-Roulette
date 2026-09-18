@@ -19,7 +19,6 @@ except:
 root.configure(bg="#393939")
 money = 100
 rounds = 0
-wins = 0
 winner = None
 donations = 0
 bet = [None,None]#       [Ball#,$$$] 
