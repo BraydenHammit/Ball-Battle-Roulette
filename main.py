@@ -231,7 +231,7 @@ def donate():
             cos.append('donate')
             cosset['donate'] = True
             roundNum.configure(fg="#7c820e")
-            donbutt.configure(text='Secret Cosmetic Unlocked:\nGolden Round Number',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
+            donbutt.configure(text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
         textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
         root.update_idletasks()
     else:
