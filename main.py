@@ -146,7 +146,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=2)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, wins, splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, wins, cosset, splits=[]))
     except: None
 
 #---------------------------------------------------------------------------------------------------
@@ -179,7 +179,7 @@ shop.destroy()
 
 #Shop Window Functions:
 def openShop():
-    global shop, cosbutt, donbutt
+    global shop, cosbutt, donbutt, bldbutt, cosset
     if not shop.winfo_exists():
         shop = InternalWindow(root,'Shop')
         #if ucos == []:
@@ -187,8 +187,14 @@ def openShop():
         #else:
         #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
         #cosbutt.pack(expand=True)
+        if 'bloodbath' in cos:
+            bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
+        elif wins >= 10:
+            bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
+            cos.append('bloodbath')
+            cosset['bloodbath'] = True
         if 'donate' in cos:
-            donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
+            donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
         else:
             donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
         donbutt.pack(expand=True)

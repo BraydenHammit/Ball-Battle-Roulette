@@ -26,7 +26,7 @@ def wrap_ball(canvas, shape):
 
 
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, cosset, splits=[]):
     prps = None
     frm += 1
 
@@ -406,7 +406,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         root.update_idletasks()
         if winner == 'ball1':
             if 'bloodbath' in cos:
-                canvas.configure(bg="blue")
+                if cosset['bloodbath'] == True:
+                    canvas.configure(bg="blue")
             canvas.delete(ball2['shape'])
             try:
                 if ball2['extshape'] is not None:
@@ -414,7 +415,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             except KeyError: None
         if winner == 'ball2':
             if 'bloodbath' in cos:
-                canvas.configure(bg="red")
+                if cosset['bloodbath'] == True:
+                    canvas.configure(bg="red")
             canvas.delete(ball1['shape'])
             try:
                 if ball1['extshape'] is not None:
@@ -422,10 +424,11 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             except KeyError: None
         elif winner == 'draw':
             canvas.delete('all')
-            if 'bllodbath' in cos:
-                canvas.configure(bg='purple')
+            if 'bloodbath' in cos:
+                if cosset['bloodbath'] == True:
+                    canvas.configure(bg='purple')
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, cosset, splits=splits))
 
 def won(canvas,checkforwinner,winner,self, wins):
     self.destroy()
