@@ -202,10 +202,12 @@ def main(L=False, q=None):
             #cosbutt.pack(expand=True)
             if 'bloodbath' in cos:
                 bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
+                bldbutt.pack(expand=True)
             elif canvas.wins >= 10:
                 bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
                 cos.append('bloodbath')
                 cosset['bloodbath'] = True
+                bldbutt.pack(expand=True)
             if 'donate' in cos:
                 donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
             else:
