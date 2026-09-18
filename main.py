@@ -71,27 +71,29 @@ def start_bet():
 
 
 #After Round Finished:
-def round_won(winner, wins):
+def round_won(winner):
     global money, textboxW, canvas
     prevmoney = money
 
     if winner == 'ball1':
         if bet[0] == 'ball1':
             money += bet[1]
-            wins += 1
+            canvas.wins += 1
         else:
             money -= bet[1]
     elif winner == 'ball2':
         if bet[0] == 'ball2':
             money += bet[1]
-            wins += 1
+            canvas.wins += 1
         else:
             money -= bet[1]
 
 
     healthbar1.pack_forget()
+    wins = canvas.wins
     canvas.destroy()
     canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
+    canvas.wins = wins
     canvas.mx = 0
     canvas.my = 0
     canvas.ghostinvince = None
@@ -146,7 +148,7 @@ def start(betNONGLOBAL):
                 healthbar2.pack(pady=2)
                 
 
-                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, wins, cosset, splits=[]))
+                root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, cosset, splits=[]))
     except: None
 
 #---------------------------------------------------------------------------------------------------
@@ -154,6 +156,7 @@ def start(betNONGLOBAL):
 #TKinter Object Variables:
 canvas = tk.Canvas(root, width=900, height=600, bg="gray50", highlightbackground="gray10")
 canvas.ghostinvince = None
+canvas.wins = 0
 canvas.echotp = False
 start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
 roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')
@@ -189,7 +192,7 @@ def openShop():
         #cosbutt.pack(expand=True)
         if 'bloodbath' in cos:
             bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
-        elif wins >= 10:
+        elif canvas.wins >= 10:
             bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
             cos.append('bloodbath')
             cosset['bloodbath'] = True

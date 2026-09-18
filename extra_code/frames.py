@@ -26,7 +26,7 @@ def wrap_ball(canvas, shape):
 
 
 
-def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, cosset, splits=[]):
+def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, cosset, splits=[]):
     prps = None
     frm += 1
 
@@ -398,7 +398,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     else: 
         winner = None
     if winner is not None:
-        cont = tk.Button(root, text='Continue', highlightbackground="#494949", command=lambda: won(canvas, checkforwinner, winner, cont, wins))
+        cont = tk.Button(root, text='Continue', highlightbackground="#494949", command=lambda: won(canvas, checkforwinner, winner, cont))
         if plt.system() == 'Linux':  
             clstxtbx[0].pack_forget()
             clstxtbx[1].pack_forget()
@@ -428,9 +428,9 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 if cosset['bloodbath'] == True:
                     canvas.configure(bg='purple')
     else:
-        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, cosset, splits=splits))
+        root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, cosset, splits=splits))
 
-def won(canvas,checkforwinner,winner,self, wins):
+def won(canvas,checkforwinner,winner,self):
     self.destroy()
     canvas.delete('all')
-    checkforwinner(winner, wins)
+    checkforwinner(winner)
