@@ -422,7 +422,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             except KeyError: None
         elif winner == 'draw':
             canvas.delete('all')
-            canvas.configure(bg='purple')
+            if 'bllodbath' in cos:
+                canvas.configure(bg='purple')
     else:
         root.after(16, lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwinner, frm, dmg, clstxtbx, cos, wins, splits=splits))
 
