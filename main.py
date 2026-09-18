@@ -209,25 +209,25 @@ def main(L=False, q=None):
                 donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
             donbutt.pack(expand=True)
 
-    def roll():
-        global money, ucos, cos, cosset
-        if money > 150:
-            money -= 150
-            rollNum = ran.randint(0,(len(ucos))-1)
-            rolll = ucos[rollNum]
-            cos.append(rolll)
-            cosset[rolll] = True
-            ucos.pop(rollNum)
-            cosbutt.configure(text=f'Rolled:\n{rolll.title()}')
-            textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
-            root.after(1000,resetRollTxt)
-            if ucos == []:
-                cosbutt.configure(command=None)
-            root.update_idletasks()
-        else:
-            cosbutt.configure(text='Cannot\nPurchase!',fg='red')
-            root.update_idletasks()
-            root.after(1000,resetRollTxt)
+    #def roll():
+    #    global money, ucos, cos, cosset
+    #    if money > 150:
+    #        money -= 150
+    #        rollNum = ran.randint(0,(len(ucos))-1)
+    #        rolll = ucos[rollNum]
+    #        cos.append(rolll)
+    #        cosset[rolll] = True
+    #        ucos.pop(rollNum)
+    #        cosbutt.configure(text=f'Rolled:\n{rolll.title()}')
+    #        textboxM.configure(text=f'You have: ${money}\n\nWhat would you like to bet?')
+    #        root.after(1000,resetRollTxt)
+    #        if ucos == []:
+    #            cosbutt.configure(command=None)
+    #        root.update_idletasks()
+    #    else:
+    #        cosbutt.configure(text='Cannot\nPurchase!',fg='red')
+    #        root.update_idletasks()
+    #        root.after(1000,resetRollTxt)
 
     def donate():
         global money, donations, cos, cosset
