@@ -37,6 +37,31 @@ def main(L=False, q=None):
 
     #---------------------------------------------------------------------------------------------------
 
+    #Game Speed:
+    def gamespeed(speedbutt):
+        global canvas
+        if canvas.gamespeed == 16:
+            canvas.gamespeed = 8
+            speedbutt.configure(text='Speed: 2x')
+        elif canvas.gamespeed == 8:
+            canvas.gamespeed = 32
+            speedbutt.configure(text='Speed: 0.5x')
+        elif canvas.gamespeed == 32:
+            canvas.gamespeed = 16
+            speedbutt.configure(text='Speed: 1x')
+
+    #        canvas.gamespeed = 5
+    #        speedbutt.configure(text='Speed: 3x')
+    #    elif canvas.gamespeed == 5:
+    #        canvas.gamespeed = 3
+    #        speedbutt.configure(text='Speed: 5x')
+    #    elif canvas.gamespeed == 3:
+    #        canvas.gamespeed = 32
+    #        speedbutt.configure(text='Speed: 0.5x')
+    #    elif canvas.gamespeed == 32:
+    #        canvas.gamespeed = 16
+    #        speedbutt.configure(text='Speed: 1x')
+
 
     #Open Betting Screen:
     def start_bet():
@@ -68,7 +93,8 @@ def main(L=False, q=None):
         betting_frame.pack(pady = 5)
         betting_ok1.pack(side=tk.LEFT, padx=5)
         betting_ok2.pack(side=tk.LEFT, padx=5)
-        shop_open.pack(pady=20,side=tk.BOTTOM)
+        speedbutt.pack(pady=20,side=tk.BOTTOM)
+        shop_open.pack(pady=10,side=tk.BOTTOM)
 
         root.update_idletasks()
 
@@ -150,6 +176,7 @@ def main(L=False, q=None):
                     betting_ok1.pack_forget()
                     betting_ok2.pack_forget()
                     shop_open.pack_forget()
+                    speedbutt.pack_forget()
                     healthbar1.pack(pady=2)
                     classtextbox1.pack(pady=2)
                     canvas.pack(expand=True, fill='none')
@@ -169,6 +196,8 @@ def main(L=False, q=None):
     canvas.gamespeed = 16
     canvas.echotp = False
     start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
+    speedbutt = tk.Button(root,text='Speed: 1x',highlightbackground="#494949",command=None)
+    speedbutt.configure(command=lambda:gamespeed(speedbutt))
     roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')
     title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)
     betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
