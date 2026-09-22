@@ -201,15 +201,21 @@ def main(L=False, q=None):
             #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
             #cosbutt.pack(expand=True)
             if 'bloodbath' in cos:
-                bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
+                if cosset['bloodbath']:
+                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#CA1818",command=lambda:setting('bloodbath',bldbutt))
+                else:
+                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#3C5F0C",command=lambda:setting('bloodbath',bldbutt))
                 bldbutt.pack(expand=True)
             elif canvas.wins >= 10:
-                bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',command=lambda:setting('bloodbath',bldbutt))
+                bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#CA1818",command=lambda:setting('bloodbath',bldbutt))
                 cos.append('bloodbath')
                 cosset['bloodbath'] = True
                 bldbutt.pack(expand=True)
             if 'donate' in cos:
-                donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',command=lambda:setting('donate',donbutt))
+                if cosset['donate']:
+                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',bg='#CA1818',command=lambda:setting('donate',donbutt))
+                else:
+                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
             else:
                 donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
             donbutt.pack(expand=True)
