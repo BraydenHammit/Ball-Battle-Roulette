@@ -136,14 +136,12 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         if (frm % 32) == 0:
             ball1['damage'] += ball1['damage']*0.01
             ball1['max hp'] += int(round(ball1['max hp']*0.01,0))
-            ball1['hp'] += round(ball1['hp']*0.1,10)
             crds = canvas.coords(ball1['shape'])
             canvas.coords(ball1['shape'],crds[0]-1,crds[1]-1,crds[2]+1,crds[3]+1)
     if ball2['type'] == 'grower':
         if (frm % 32) == 0:
             ball2['damage'] += ball2['damage']*0.01
             ball2['max hp'] += int(round(ball2['max hp']*0.01,0))
-            ball2['hp'] += ball2['hp']*0.01
             crds = canvas.coords(ball2['shape'])
             canvas.coords(ball2['shape'],crds[0]-1,crds[1]-1,crds[2]+1,crds[3]+1)
 
