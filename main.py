@@ -258,11 +258,11 @@ def main(L=False, q=None):
             root.after(1000,resetDonTxt)
 
 
-    def resetRollTxt():
-        cosbutt.configure(text='Purchase Cosmetic\n$150',fg='black')
-        if ucos == []:
-            cosbutt.configure(text='All Cosmetics Unlocked,\nGreat Job I Suppose')
-        root.update_idletasks()
+    #def resetRollTxt():
+    #    cosbutt.configure(text='Purchase Cosmetic\n$150',fg='black')
+    #    if ucos == []:
+    #        cosbutt.configure(text='All Cosmetics Unlocked,\nGreat Job I Suppose')
+    #    root.update_idletasks()
 
     def resetDonTxt():
         if 'donate' not in cos:
