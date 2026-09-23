@@ -212,7 +212,7 @@ def create_balls(canvas, root):
             'damage': 0,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'timer': 240,
+            'timer': 2400,
             'type': 'atom'
         }
 
@@ -414,7 +414,7 @@ def create_balls(canvas, root):
             'damage': 0,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'timer': 240,
+            'timer': 2400,
             'type': 'atom'
         }
 
