@@ -206,7 +206,7 @@ def create_balls(canvas, root):
     if ball1type == 'atom':
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
-            'shape': canvas.create_oval(10, 10, 11, 11, fill='red'),
+            'shape': canvas.create_oval(10, 10, 13, 13, fill='red'),
             'hp': 1,
             'max hp': 1,
             'damage': 0,
@@ -408,7 +408,7 @@ def create_balls(canvas, root):
     if ball2type == 'atom':
         temp_dx = ran.uniform(0.0, 10.0)
         ball2 = {
-            'shape': canvas.create_oval(889, 589, 890, 590, fill='blue'),
+            'shape': canvas.create_oval(888, 587, 890, 590, fill='blue'),
             'hp': 1,
             'max hp': 1,
             'damage': 0,
