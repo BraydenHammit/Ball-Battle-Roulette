@@ -62,5 +62,7 @@ def stats(t):
     elif t == 'looper':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Loops To Other Side Of Arena'
     elif t == 'grower':
-        text = 'HP: 75, Damage: 7.5, Velocity: 10,\nHP, Damage, and Size Increase Over Time'
+        text = 'HP: 75, Damage: 7.5, Velocity: 10,\nSpecial: HP, Damage, and Size Increase Over Time'
+    elif t == 'atom':
+        text = 'HP: 1, Damage 0, Velocity 10,\nSpecial: Splits After 15 Seconds,\nCausing A Nuclear Explosion And Instant Win'
     return text

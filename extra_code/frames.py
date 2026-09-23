@@ -145,6 +145,12 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             crds = canvas.coords(ball2['shape'])
             canvas.coords(ball2['shape'],crds[0]-1,crds[1]-1,crds[2]+1,crds[3]+1)
 
+    #Atom Countdown:
+    if ball1['type'] == 'atom':
+        ball1['timer'] -= 1
+        if ball1['timer'] <= 0:
+            return
+
     #Healing:
     if ball1['type'] == 'healer':
         ball1['hp'] += ran.uniform(0.0,0.25)

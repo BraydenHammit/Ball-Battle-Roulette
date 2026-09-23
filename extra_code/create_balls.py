@@ -12,7 +12,7 @@ def create_balls(canvas, root):
             ball2type = 'big'
         else:
             ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower'])
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower']) #add atom
 
 
 
@@ -203,6 +203,18 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'grower'
         }
+    if ball1type == 'atom':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 11, 11, fill='red'),
+            'hp': 1,
+            'max hp': 1,
+            'damage': 0,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'timer': 240,
+            'type': 'atom'
+        }
 
 
 
@@ -392,6 +404,18 @@ def create_balls(canvas, root):
             'dx': temp_dx,
             'dy': 10 - temp_dx,
             'type': 'grower'
+        }
+    if ball2type == 'atom':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(889, 589, 890, 590, fill='blue'),
+            'hp': 1,
+            'max hp': 1,
+            'damage': 0,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'timer': 240,
+            'type': 'atom'
         }
 
 
