@@ -149,6 +149,30 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     if ball1['type'] == 'atom':
         ball1['timer'] -= 1
         if ball1['timer'] <= 0:
+            cont = tk.Button(root, text='Continue', highlightbackground="#494949", command=lambda: won(canvas, checkforwinner, winner, cont))
+            if plt.system() == 'Linux':  
+                clstxtbx[0].pack_forget()
+                clstxtbx[1].pack_forget()
+            cont.pack(side=tk.BOTTOM, pady=10)
+            root.update_idletasks()
+            winner = "ball1"
+            healthbar2.configure(text=f'COOKED')
+            canvas.configure(bg="orange")
+            canvas.delete('all')
+            return
+    if ball2['type'] == 'atom':
+        ball2['timer'] -= 1
+        if ball2['timer'] <= 0:
+            winner = "ball2"
+            cont = tk.Button(root, text='Continue', highlightbackground="#494949", command=lambda: won(canvas, checkforwinner, winner, cont))
+            if plt.system() == 'Linux':  
+                clstxtbx[0].pack_forget()
+                clstxtbx[1].pack_forget()
+            cont.pack(side=tk.BOTTOM, pady=10)
+            root.update_idletasks()
+            healthbar1.configure(text=f'COOKED')
+            canvas.configure(bg="orange")
+            canvas.delete('all')
             return
 
     #Healing:
