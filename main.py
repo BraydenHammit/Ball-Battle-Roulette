@@ -43,7 +43,7 @@ def main(L=False, q=None):
         if canvas.gamespeed == 16:
             canvas.gamespeed = 8
             speedbutt.configure(text='Speed: 2x')
-        if canvas.gamespeed == 8:
+        elif canvas.gamespeed == 8:
             canvas.gamespeed = 16
             speedbutt.configure(text='Speed: 1x')
 
