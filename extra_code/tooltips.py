@@ -41,7 +41,7 @@ def stats(t):
         text = 'HP: 50, Damage: 22.5, Velocity: 25,\nSpecial: Speeds Up After Every Wall Bounce'
     elif t == 'vampire':
         text = 'HP: 100, Damage: 10, Velocity: 10,\nSpecial: Spawn at 75 Health, Lifesteal 25% of Damage.'
-    elif t == 'splitting':
+    elif t == 'splitter':
         text = 'HP: 175, Damage: 2.5, Velocity:10,\nSpecial: Splits in Two Every Hit'
     elif t == 'healer':
         text = 'HP: 50, Damage: 6.75, Velocity:10,\nSpecial: 5x Passive Regen Speed'

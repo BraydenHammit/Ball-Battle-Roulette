@@ -5,14 +5,14 @@ def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
     tries = 0
-    while (ball1type == ball2type) or ((ball1type == 'splitting' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitting')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')) or ((ball1type == 'splitting' and ball2type == 'chaser') or (ball1type =='chaser' and ball2type == 'splitting')):
+    while (ball1type == ball2type) or ((ball1type == 'splitter' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitter')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')) or ((ball1type == 'splitter' and ball2type == 'chaser') or (ball1type =='chaser' and ball2type == 'splitter')):
         tries += 1
         if tries >= 50:
             ball1type = 'default'
             ball2type = 'big'
         else:
-            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitting','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])
+            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])      #Classes
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])
 
 
 
@@ -75,7 +75,7 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'vampire'
         }
-    elif ball1type == 'splitting':
+    elif ball1type == 'splitter':
         temp_dx = ran.uniform(0.0, 10.0)
         ball1 = {
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
@@ -84,7 +84,7 @@ def create_balls(canvas, root):
             'damage': 2.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'type': 'splitting'
+            'type': 'splitter'
         }
     elif ball1type == 'healer':
         temp_dx = ran.uniform(0.0, 10.0)
@@ -277,7 +277,7 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'type': 'vampire'
         }
-    elif ball2type == 'splitting':
+    elif ball2type == 'splitter':
         temp_dx = ran.uniform(0.0, 10.0)
         ball2 = {
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
@@ -286,7 +286,7 @@ def create_balls(canvas, root):
             'damage': 2.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'type': 'splitting'
+            'type': 'splitter'
         }
     elif ball2type == 'healer':
         temp_dx = ran.uniform(0.0, 10.0)

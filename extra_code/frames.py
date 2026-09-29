@@ -264,8 +264,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
 #---------------------------------------------------------------------------------------------------
 
-    #Splitting Loop:
-    if (ball1['type'] == 'splitting' or ball2['type'] == 'splitting') and splits != []:
+    #splitter Loop:
+    if (ball1['type'] == 'splitter' or ball2['type'] == 'splitter') and splits != []:
         for num, var in enumerate(splits):
             if var[1][2] <= 0:
                 try:
@@ -284,27 +284,27 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 var[1][1] = -var[1][1] - tempMult
                 var[1][0] += tempMult
 
-            if ball1['type'] == 'splitting':
+            if ball1['type'] == 'splitter':
                 if (tempPos[2] >= pos2[0] and tempPos[0] <= pos2[2] and tempPos[3] >= pos2[1] and tempPos[1] <= pos2[3]):
                     splits, var[1][0], var[1][1], var[1][2], ball2['dx'], ball2['dy'], ball2['hp'] = dmg(root, canvas, prps, splits, frm,
-                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
+                    var[0], 'splitter', 2.5, var[1][0], var[1][1], var[1][2],
                     ball2['shape'], ball2['type'], ball2['damage'], ball2['dx'], ball2['dy'], ball2['hp'], splitNum=num)
                 if ball2['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
                         splits, var[1][0], var[1][1], var[1][2], ball2['edx'], ball2['edy'], ball2['hp'] = dmg(root, canvas, prps, splits, frm,
-                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2],
+                        var[0], 'splitter', 2.5, var[1][0], var[1][1], var[1][2],
                         ball2['extshape'], 'duo', 10, ball2['edx'], ball2['edy'], ball2['hp'], splitNum=num, duoAttk=2)
 
-            if ball2['type'] == 'splitting':
+            if ball2['type'] == 'splitter':
                 if (tempPos[2] >= pos1[0] and tempPos[0] <= pos1[2] and tempPos[3] >= pos1[1] and tempPos[1] <= pos1[3]):
                     splits, ball1['dx'], ball1['dy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(root, canvas, prps, splits, frm,
                     ball1['shape'], ball1['type'], ball1['damage'], ball1['dx'], ball1['dy'], ball1['hp'],
-                    var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num)
+                    var[0], 'splitter', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num)
                 if ball1['type'] == 'duo':
                     if (tempPos[2] >= duoAttkPos[0] and tempPos[0] <= duoAttkPos[2] and tempPos[3] >= duoAttkPos[1] and tempPos[1] <= duoAttkPos[3]):
                         splits, ball1['edx'], ball1['edy'], ball1['hp'], var[1][0], var[1][1], var[1][2] = dmg(root, canvas, prps, splits, frm,
                         ball1['extshape'], 'duo', 10, ball1['edx'], ball1['edy'], ball1['hp'],
-                        var[0], 'splitting', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num, duoAttk=1)
+                        var[0], 'splitter', 2.5, var[1][0], var[1][1], var[1][2], splitNum=num, duoAttk=1)
 
 
             if var[1][2] > 175:
@@ -412,15 +412,15 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
 
     #Check For Winner / Continue:
-    if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')) and (ball2['hp'] <= 0) and (
-    splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
+    if (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitter' or ball2['type'] == 'splitter')) and (ball2['hp'] <= 0) and (
+    splits == [] or (ball2['type'] != 'splitter' or ball1['type'] == 'splitter')):
         winner = "draw"
         healthbar1.configure(text=f'0/{ball1["max hp"]}')
         healthbar2.configure(text=f'0/{ball2["max hp"]}')
-    elif (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitting' or ball2['type'] == 'splitting')):
+    elif (ball1['hp'] <= 0) and (splits == [] or (ball1['type'] != 'splitter' or ball2['type'] == 'splitter')):
         winner = "ball2"
         healthbar1.configure(text=f'0/{ball1["max hp"]}')
-    elif (ball2['hp'] <= 0) and (splits == [] or (ball2['type'] != 'splitting' or ball1['type'] == 'splitting')):
+    elif (ball2['hp'] <= 0) and (splits == [] or (ball2['type'] != 'splitter' or ball1['type'] == 'splitter')):
         winner = "ball1"
         healthbar2.configure(text=f'0/{ball2["max hp"]}')
     else: 

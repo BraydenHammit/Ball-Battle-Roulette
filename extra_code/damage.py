@@ -22,8 +22,8 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
         if o2t == 'vampire' and duoAttk != 1 and sentryProj != 1:
             o2hp += 0.25*o1depletion
 
-        #Splitting Splits:
-        if o1t == 'splitting' and len(splits) <= 15:
+        #splitter Splits:
+        if o1t == 'splitter' and len(splits) <= 15:
             tempPos = canvas.coords(o1)
             if o1hp <= 0:
                 canvas.delete(o1)
@@ -32,7 +32,7 @@ def dmg(root, canvas, prevpos, splits, frm, o1, o1t, o1d, o1dx, o1dy, o1hp, o2, 
             else:
                 o1hp = o1hp / 2
                 splits.append([canvas.create_oval(tempPos[0], tempPos[1], tempPos[2], tempPos[3], fill='red'),[-o1dx,-o1dy,o1hp]])
-        if o2t == 'splitting' and len(splits) <= 15:
+        if o2t == 'splitter' and len(splits) <= 15:
             tempPos = canvas.coords(o2)
             if o2hp <= 0:
                 canvas.delete(o2)
