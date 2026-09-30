@@ -41,6 +41,10 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             y = [x[0] - 40, x[1] -40]
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
 
+    #[arena class thing] Arena Shrinking
+    if ball1['type'] == '[arena class thing]' or ball2['type'] == '[arena class thing]':
+        canvas.config(width=(canvas.winfo_width())-0.1, height=(canvas.winfo_height())-0.1)
+
     #Echo Shenanigans:
     if ball1['type'] == 'echo':
         if canvas.echotp == True:
@@ -264,7 +268,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
 #---------------------------------------------------------------------------------------------------
 
-    #splitter Loop:
+    #Splitter Loop:
     if (ball1['type'] == 'splitter' or ball2['type'] == 'splitter') and splits != []:
         for num, var in enumerate(splits):
             if var[1][2] <= 0:
