@@ -41,9 +41,23 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             y = [x[0] - 40, x[1] -40]
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
 
-    #[arena class thing] Arena Shrinking
-    if ball1['type'] == '[arena class thing]' or ball2['type'] == '[arena class thing]':
+    #Rebounder Arena Shrinking:
+    if( ball1['type'] == 'rebounder' or ball2['type'] == 'rebounder') and (frm % 5 == 0):
         canvas.config(width=(canvas.winfo_width())-0.1, height=(canvas.winfo_height())-0.1)
+    if ball1['type'] == 'rebounder':
+        if ball1['timer'] > 0:
+            ball1['timer'] -= 1
+            ball1['damage'] = 15
+        else:
+            ball1['timer'] = 0
+            ball1['damage'] = 7.5
+    if ball2['type'] == 'rebounder':
+        if ball2['timer'] > 0:
+            ball2['timer'] -= 1
+            ball2['damage'] = 15
+        else:
+            ball2['timer'] = 0
+            ball2['damage'] = 7.5
 
     #Echo Shenanigans:
     if ball1['type'] == 'echo':
@@ -214,6 +228,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     ball2Mult = ran.uniform(-0.5,0.5)
     try:
         if pos1[2] >= canvas.winfo_width() or pos1[0] <= 0:
+            if ball1['type'] == 'rebounder':
+                ball1['timer'] = 62
             if ball1['type'] == 'hyperspeed':
                 ball1['dx'] = -ball1['dx'] * 1.05
                 ball1['dy'] *= 1.05
@@ -223,6 +239,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball1['dx'] = -ball1['dx'] - ball1Mult
                 ball1['dy'] += ball1Mult
         if pos1[3] >= canvas.winfo_height() or pos1[1] <= 0:
+            if ball1['type'] == 'rebounder':
+                ball1['timer'] = 62
             if ball1['type'] == 'hyperspeed':
                 ball1['dy'] = -ball1['dy'] * 1.05
                 ball1['dx'] *= 1.05
@@ -234,6 +252,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     except IndexError: None
     try:
         if pos2[2] >= canvas.winfo_width() or pos2[0] <= 0:
+            if ball2['type'] == 'rebounder':
+                ball2['timer'] = 62
             if ball2['type'] == 'hyperspeed':
                 ball2['dx'] = -ball2['dx'] * 1.05
                 ball2['dy'] *= 1.05
@@ -243,6 +263,8 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball2['dx'] = -ball2['dx'] - ball2Mult
                 ball2['dy'] += ball2Mult
         if pos2[3] >= canvas.winfo_height() or pos2[1] <= 0:
+            if ball2['type'] == 'rebounder':
+                ball2['timer'] = 62
             if ball2['type'] == 'hyperspeed':
                 ball2['dy'] = -ball2['dy'] * 1.05
                 ball2['dx'] *= 1.05

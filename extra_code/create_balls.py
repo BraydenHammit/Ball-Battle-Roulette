@@ -12,7 +12,7 @@ def create_balls(canvas, root):
             ball2type = 'big'
         else:
             ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])
+            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom']) #add rebounder
 
 
 
@@ -215,6 +215,18 @@ def create_balls(canvas, root):
             'timer': 950,
             'type': 'atom'
         }
+    if ball1type == 'rebounder':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball1 = {
+            'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
+            'hp': 100,
+            'max hp': 100,
+            'damage': 7.5,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'timer': 0,
+            'type': 'rebounder'
+        }
 
 
 
@@ -416,6 +428,18 @@ def create_balls(canvas, root):
             'dy': 10 - temp_dx,
             'timer': 950,
             'type': 'atom'
+        }
+    if ball2type == 'rebounder':
+        temp_dx = ran.uniform(0.0, 10.0)
+        ball2 = {
+            'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
+            'hp': 100,
+            'max hp': 100,
+            'damage': 7.5,
+            'dx': temp_dx,
+            'dy': 10 - temp_dx,
+            'timer': 0,
+            'type': 'rebounder'
         }
 
 
