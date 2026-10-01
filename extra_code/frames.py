@@ -281,11 +281,14 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             d = 100
 
     #Too far out of bounds = DEATH:
-    for c in canvas.coords(ball1['shape']):
-        if abs(c) >= 1000:
+    if frm >= 10:
+        if (abs(pos1[0]) > canvas.winfo_width()+100 or (abs(pos1[2])) > canvas.winfo_width()+100):
             ball1['hp'] = 0
-    for c in canvas.coords(ball2['shape']):
-        if abs(c) >= 1000:
+        if (abs(pos1[1]) > canvas.winfo_height()+100 or (abs(pos1[3])) > canvas.winfo_height()+100):
+            ball1['hp'] = 0
+        if (abs(pos2[0]) > canvas.winfo_width()+100 or (abs(pos2[2])) > canvas.winfo_width()+100):
+            ball2['hp'] = 0
+        if (abs(pos2[1]) > canvas.winfo_height()+100 or (abs(pos2[3])) > canvas.winfo_height()+100):
             ball2['hp'] = 0
 
 #---------------------------------------------------------------------------------------------------
