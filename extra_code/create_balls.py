@@ -188,9 +188,10 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(10, 10, 50, 50, fill='red'),
             'hp': 100,
             'max hp': 100,
-            'damage': 10,
+            'damage': 7.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
+            'timer': 0,
             'type': 'looper'
         }
     if ball1type == 'grower':
@@ -402,9 +403,10 @@ def create_balls(canvas, root):
             'shape': canvas.create_oval(850, 550, 890, 590, fill='blue'),
             'hp': 100,
             'max hp': 100,
-            'damage': 10,
+            'damage': 7.5,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
+            'timer': 0,
             'type': 'looper'
         }
     if ball2type == 'grower':

@@ -44,14 +44,16 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     #Rebounder Arena Shrinking:
     if( ball1['type'] == 'rebounder' or ball2['type'] == 'rebounder') and (frm % 5 == 0):
         canvas.config(width=(canvas.winfo_width())-8, height=(canvas.winfo_height())-8)
-    if ball1['type'] == 'rebounder':
+
+    #2x Damage Timers:
+    if ball1['type'] in ('rebounder','looper'):
         if ball1['timer'] > 0:
             ball1['timer'] -= 1
             ball1['damage'] = 15
         else:
             ball1['timer'] = 0
             ball1['damage'] = 7.5
-    if ball2['type'] == 'rebounder':
+    if ball2['type'] in ('rebounder','looper'):
         if ball2['timer'] > 0:
             ball2['timer'] -= 1
             ball2['damage'] = 15
@@ -235,6 +237,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball1['dy'] *= 1.05
             elif ball1['type'] == 'looper':
                 wrap_ball(canvas, ball1['shape'])
+                ball1['timer'] = 62
             elif ball1['type'] != 'chaser':
                 ball1['dx'] = -ball1['dx'] - ball1Mult
                 ball1['dy'] += ball1Mult
@@ -246,6 +249,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball1['dx'] *= 1.05
             elif ball1['type'] == 'looper':
                 wrap_ball(canvas,ball1['shape'])
+                ball1['timer'] = 62
             elif ball1['type'] != 'chaser':
                 ball1['dy'] = -ball1['dy'] - ball1Mult
                 ball1['dx'] += ball1Mult
@@ -259,6 +263,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball2['dy'] *= 1.05
             elif ball2['type'] == 'looper':
                 wrap_ball(canvas, ball2['shape'])
+                ball2['timer'] = 62
             elif ball2['type'] != 'chaser':
                 ball2['dx'] = -ball2['dx'] - ball2Mult
                 ball2['dy'] += ball2Mult
@@ -270,6 +275,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
                 ball2['dx'] *= 1.05
             elif ball2['type'] == 'looper':
                 wrap_ball(canvas,ball2['shape'])   
+                ball2['timer'] = 62
             elif ball2['type'] != 'chaser':
                 ball2['dy'] = -ball2['dy'] - ball2Mult
                 ball2['dx'] += ball2Mult
