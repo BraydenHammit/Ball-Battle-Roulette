@@ -66,5 +66,5 @@ def stats(t):
     elif t == 'atom':
         text = 'HP: 1, Damage 0, Velocity 10,\nSpecial: Splits After 15 Seconds,\nCausing A Nuclear Explosion And Instant Win'
     elif t == 'rebounder':
-        text = 'HP: 100, Damage 7.5, Velocity 10,\nSpecial: Slowly Shrinks Arena, Double Damage\nFor 1 Second After Wall Bounce'
+        text = 'HP: 100, Damage 7.5, Velocity 10,\nSpecial: Slowly Shrinks Arena,\nDouble Damage For 1 Second After Wall Bounce\n(Getting Fully Engulfed In Wall Instantly Kills)'
     return text
