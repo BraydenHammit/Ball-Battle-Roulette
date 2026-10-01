@@ -5,14 +5,15 @@ def create_balls(canvas, root):
     ball1type = 0
     ball2type = 0
     tries = 0
+    classes = ['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom','rebounder']
     while (ball1type == ball2type) or ((ball1type == 'splitter' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitter')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')) or ((ball1type == 'splitter' and ball2type == 'chaser') or (ball1type =='chaser' and ball2type == 'splitter')):
         tries += 1
         if tries >= 50:
             ball1type = 'default'
             ball2type = 'big'
         else:
-            ball1type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom'])      #Classes
-            ball2type = ran.choice(['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom']) #add rebounder
+            ball1type = ran.choice(classes)
+            ball2type = ran.choice(classes)
 
 
 
