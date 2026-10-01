@@ -43,7 +43,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
     #Rebounder Arena Shrinking:
     if( ball1['type'] == 'rebounder' or ball2['type'] == 'rebounder') and (frm % 5 == 0):
-        canvas.config(width=(canvas.winfo_width())-0.1, height=(canvas.winfo_height())-0.1)
+        canvas.config(width=(canvas.winfo_width())-8, height=(canvas.winfo_height())-8)
     if ball1['type'] == 'rebounder':
         if ball1['timer'] > 0:
             ball1['timer'] -= 1
@@ -282,10 +282,10 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
 
     #Too far out of bounds = DEATH:
     for c in canvas.coords(ball1['shape']):
-        if abs(c) >= 3000:
+        if abs(c) >= 1000:
             ball1['hp'] = 0
     for c in canvas.coords(ball2['shape']):
-        if abs(c) >= 3000:
+        if abs(c) >= 1000:
             ball2['hp'] = 0
 
 #---------------------------------------------------------------------------------------------------
