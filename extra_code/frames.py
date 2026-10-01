@@ -42,7 +42,7 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
             canvas.coords(ball2['shape'],x[0],x[1],y[0],y[1])
 
     #Rebounder Arena Shrinking:
-    if( ball1['type'] == 'rebounder' or ball2['type'] == 'rebounder') and (frm % 5 == 0):
+    if (ball1['type'] == 'rebounder' or ball2['type'] == 'rebounder') and (frm % 5 == 0):
         canvas.config(width=(canvas.winfo_width())-8, height=(canvas.winfo_height())-8)
 
     #2x Damage Timers:
@@ -216,6 +216,10 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
         canvas.move(ball2['shape'], ball2['dx'], ball2['dy'])
     pos1 = canvas.coords(ball1['shape'])
     pos2 = canvas.coords(ball2['shape'])
+    if pos1 == []:
+        pos1 = [0,0,0,0]
+    if pos2 == []:
+        pos2 = [0,0,0,0]
     if ball1['type'] == 'duo':
         duoAttkPos = canvas.coords(ball1['extshape'])
     if ball2['type'] == 'duo':
