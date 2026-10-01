@@ -6,7 +6,7 @@ def create_balls(canvas, root):
     ball2type = 0
     tries = 0
     classes = ['default','big','fast','hyperspeed','vampire','splitter','healer','duo','zombie','sentry','black hole','echo','chaser','ghost','looper','grower','atom','rebounder']
-    while (ball1type == ball2type) or ((ball1type == 'splitter' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitter')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')) or ((ball1type == 'splitter' and ball2type == 'chaser') or (ball1type =='chaser' and ball2type == 'splitter')):
+    while (ball1type == ball2type) or ((ball1type == 'splitter' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'splitter')) or ((ball1type == 'ghost' and ball2type == 'sentry') or (ball1type =='sentry' and ball2type == 'ghost')) or ((ball1type == 'splitter' and ball2type == 'chaser') or (ball1type =='chaser' and ball2type == 'splitter')) or ((ball1type == 'splitter' and ball2type == 'rebounder') or (ball1type =='rebounder' and ball2type == 'splitter')):
         tries += 1
         if tries >= 50:
             ball1type = 'default'
