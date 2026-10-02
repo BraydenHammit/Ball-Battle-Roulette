@@ -286,9 +286,12 @@ def frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, checkforwi
     except IndexError: None
 
     #Terminal Velocity:
-    for d in [ball1['dx'],ball2['dx'],ball1['dy'],ball2['dy']]:
-        if d > 100:
-            d = 100
+    for ball in (ball1, ball2):
+        for key in ('dx', 'dy'):
+            if ball[key] > 100:
+                ball[key] = 100
+            elif ball[key] < -100:
+                ball[key] = -100
 
     #Too far out of bounds = DEATH:
     if frm >= 10:
