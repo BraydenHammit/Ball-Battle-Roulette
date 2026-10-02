@@ -64,8 +64,8 @@ def main(L=False, q=None):
     def start_bet():
         global ball2, ball1, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, roundNum, rounds
         rounds += 1
-        start_button.configure(highlightbackground="#494949")
-        root.configure(bg="#494949")
+        start_button.configure(highlightbackground="#352B26")
+        root.configure(bg="#352B26")
         start_button.pack_forget()
         title.pack_forget()
         try:
@@ -74,12 +74,12 @@ def main(L=False, q=None):
         canvas.delete('all')
         ball1, ball2 = create_balls(canvas, root)
         roundNum.configure(text=f'Round {rounds}:')
-        textbox1.configure(text=f'(i) Ball 1: {ball1["type"].title()}', fg='red', bg="#494949")
-        textbox2.configure(text=f'(i) Ball 2: {ball2["type"].title()}', fg='blue', bg="#494949")
+        textbox1.configure(text=f'(i) Ball 1: {ball1["type"].title()}', fg='red', bg="#352B26")
+        textbox2.configure(text=f'(i) Ball 2: {ball2["type"].title()}', fg='blue', bg="#352B26")
         tooltip1.text=stats(ball1['type'])
         tooltip2.text=stats(ball2['type'])
-        textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#494949")
-        textboxW = tk.Label(text='Who would you like to bet on?', bg="#494949")
+        textboxM = tk.Label(text=f'You have: ${money}\n\nWhat would you like to bet?', bg="#352B26")
+        textboxW = tk.Label(text='Who would you like to bet on?', bg="#352B26")
         roundNum.pack(pady = 7)
         textbox_frame.pack(pady = 5)
         textbox1.pack(side=tk.LEFT, padx = 5)
@@ -131,13 +131,13 @@ def main(L=False, q=None):
         speedbutt.pack_forget()
         new = None
         if winner == 'draw':
-            textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
+            textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#352B26")
         else:
-            textboxW = tk.Label(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.',bg="#494949")
+            textboxW = tk.Label(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.',bg="#352B26")
         if money <= 0:
             textboxW.configure(text=f'Ball {winner[4]} won.\n\nYou made ${money-prevmoney}, and are now at ${money}.\n\nYou ran out of money and made some terrible gambling decisions.\n\nGoodbye.')
             start_button.configure(text='Exit', command=lambda: root.destroy())
-            new = tk.Button(root, text='Restart', highlightbackground="#494949", command=lambda: main(L=True, q=root))
+            new = tk.Button(root, text='Restart', highlightbackground="#352B26", command=lambda: main(L=True, q=root))
         else:
             start_button.configure(text='Ok')
         textboxW.pack(pady = 10)
@@ -202,28 +202,28 @@ def main(L=False, q=None):
     canvas.gamespeed = 16
     canvas.echotp = False
     start_button = tk.Button(root, text="Start", highlightbackground="#393939", command=lambda: start_bet())
-    speedbutt = tk.Button(root,text='Speed: 1x',highlightbackground="#494949",command=None)
+    speedbutt = tk.Button(root,text='Speed: 1x',highlightbackground="#352B26",command=None)
     speedbutt.configure(command=lambda:gamespeed(speedbutt))
-    roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#494949", fg='#363636')
+    roundNum = tk.Label(root, text=f'Round {rounds}', font=("Arial", 30, "bold"), bg="#352B26", fg="#151212")
     title = tk.Label(root, image=images['title'], borderwidth=0, highlightthickness=0)
-    betting_enter = tk.Entry(root, highlightbackground="#494949", width=30)
-    betting_frame = tk.Frame(root, bg="#494949")
-    betting_ok1 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 1', command = lambda: start('ball1'))
-    betting_ok2 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
+    betting_enter = tk.Entry(root, highlightbackground="#352B26", width=30)
+    betting_frame = tk.Frame(root, bg="#352B26")
+    betting_ok1 = tk.Button(betting_frame, highlightbackground="#352B26", text='Ball 1', command = lambda: start('ball1'))
+    betting_ok2 = tk.Button(betting_frame, highlightbackground="#352B26", text='Ball 2', command = lambda: start('ball2'))
     if plt.system() == 'Linux':
-        healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,15))
-        healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,15))
+        healthbar1 = tk.Label(text=None,fg='red', bg="#352B26",font=(None,15))
+        healthbar2 = tk.Label(text=None,fg='blue', bg="#352B26",font=(None,15))
     else:
-        healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
-        healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
-    classtextbox1 = tk.Label(text=None,fg='red', bg="#494949")
-    classtextbox2 = tk.Label(text=None,fg='blue', bg="#494949")
-    textbox_frame = tk.Frame(root, bg="#494949")
-    textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#494949")
-    textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#494949")
+        healthbar1 = tk.Label(text=None,fg='red', bg="#352B26",font=(None,30))
+        healthbar2 = tk.Label(text=None,fg='blue', bg="#352B26",font=(None,30))
+    classtextbox1 = tk.Label(text=None,fg='red', bg="#352B26")
+    classtextbox2 = tk.Label(text=None,fg='blue', bg="#352B26")
+    textbox_frame = tk.Frame(root, bg="#352B26")
+    textbox1 = tk.Label(textbox_frame,text=f'Ball 1 will be: N/A', fg='red', bg="#352B26")
+    textbox2 = tk.Label(textbox_frame,text=f'Ball 2 will be: N/A', fg='blue', bg="#352B26")
     tooltip1 = toolTip(textbox1,None)
     tooltip2 = toolTip(textbox2,None)
-    shop_open = tk.Button(root, highlightbackground="#494949", text='Shop', command = lambda: openShop())
+    shop_open = tk.Button(root, highlightbackground="#352B26", text='Shop', command = lambda: openShop())
     shop = tk.Label(root,text=None)
     shop.destroy()
 
@@ -235,28 +235,28 @@ def main(L=False, q=None):
         if not shop.winfo_exists():
             shop = InternalWindow(root,'Shop')
             #if ucos == []:
-            #    cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#494949",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
+            #    cosbutt = tk.Button(shop,text='Cosmetics Have Not\nBeen Added Yet',highlightbackground="#352B26",fg='black') #'All Cosmetics Unlocked,\nGreat Job I Suppose'
             #else:
-            #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#494949",fg='black',command=roll)
+            #    cosbutt = tk.Button(shop,text='Purchase Cosmetic\n$150',highlightbackground="#352B26",fg='black',command=roll)
             #cosbutt.pack(expand=True)
             if 'bloodbath' in cos:
                 if cosset['bloodbath']:
-                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#3C5F0C",command=lambda:setting('bloodbath',bldbutt))
+                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#352B26",fg='black',bg="#3C5F0C",command=lambda:setting('bloodbath',bldbutt))
                 else:
-                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#CA1818",command=lambda:setting('bloodbath',bldbutt))
+                    bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#352B26",fg='black',bg="#CA1818",command=lambda:setting('bloodbath',bldbutt))
                 bldbutt.pack(expand=True)
             elif canvas.wins >= 10:
-                bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#494949",fg='black',bg="#Ca1818",command=lambda:setting('bloodbath',bldbutt))
+                bldbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nBloodbath Endscreen\n10 Won Bets',highlightbackground="#352B26",fg='black',bg="#Ca1818",command=lambda:setting('bloodbath',bldbutt))
                 cos.append('bloodbath')
                 cosset['bloodbath'] = False
                 bldbutt.pack(expand=True)
             if 'donate' in cos:
                 if cosset['donate']:
-                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
+                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#352B26",fg='black',bg='#3C5F0C',command=lambda:setting('donate',donbutt))
                 else:
-                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#494949",fg='black',bg='#CA1818',command=lambda:setting('donate',donbutt))
+                    donbutt = tk.Button(shop,text='Secret Cosmetic Unlocked:\nGolden Round Number\n100 Donations',highlightbackground="#352B26",fg='black',bg='#CA1818',command=lambda:setting('donate',donbutt))
             else:
-                donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#494949",fg='black',command=donate)
+                donbutt = tk.Button(shop,text='Donate\n$1',highlightbackground="#352B26",fg='black',command=donate)
             donbutt.pack(expand=True)
 
     #def roll():
@@ -313,7 +313,7 @@ def main(L=False, q=None):
             cosset[cosmetic] = False
             button.configure(bg="#CA1818")
             if cosmetic == 'donate':
-                roundNum.configure(fg='#363636')
+                roundNum.configure(fg='#151212')
         elif cosset[cosmetic] == False:
             cosset[cosmetic] = True
             button.configure(bg="#3C5F0C")
