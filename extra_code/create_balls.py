@@ -214,7 +214,7 @@ def create_balls(canvas, root):
             'damage': 0,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'timer': 950,
+            'timer': 620,
             'type': 'atom'
         }
     if ball1type == 'rebounder':
@@ -429,7 +429,7 @@ def create_balls(canvas, root):
             'damage': 0,
             'dx': temp_dx,
             'dy': 10 - temp_dx,
-            'timer': 950,
+            'timer': 620,
             'type': 'atom'
         }
     if ball2type == 'rebounder':
