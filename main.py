@@ -154,12 +154,20 @@ def main(L=False, q=None):
         try:
             if (int(betting_enter.get()) >= 0) and (int(betting_enter.get()) <= money):
                     bet = [betNONGLOBAL,int(betting_enter.get())]
-                    if bet[0] == 'ball1':
-                        classtextbox1.configure(text=f'{ball1["type"].title()}\n\nBetting: FOR')
-                        classtextbox2.configure(text=f'Betting: AGAINST\n\n{ball2["type"].title()}')
-                    elif bet[0] == 'ball2':
-                        classtextbox1.configure(text=f'{ball1["type"].title()}\n\nBetting: AGAINST')
-                        classtextbox2.configure(text=f'Betting: FOR\n\n{ball2["type"].title()}')
+                    if plt.system() == 'Linux':
+                        if bet[0] == 'ball1':
+                            classtextbox1.configure(text=f'{ball1["type"].title()}\nBetting: FOR')
+                            classtextbox2.configure(text=f'Betting: AGAINST\n{ball2["type"].title()}')
+                        elif bet[0] == 'ball2':
+                            classtextbox1.configure(text=f'{ball1["type"].title()}\nBetting: AGAINST')
+                            classtextbox2.configure(text=f'Betting: FOR\n{ball2["type"].title()}')
+                    else:
+                        if bet[0] == 'ball1':
+                            classtextbox1.configure(text=f'{ball1["type"].title()}\n\nBetting: FOR')
+                            classtextbox2.configure(text=f'Betting: AGAINST\n\n{ball2["type"].title()}')
+                        elif bet[0] == 'ball2':
+                            classtextbox1.configure(text=f'{ball1["type"].title()}\n\nBetting: AGAINST')
+                            classtextbox2.configure(text=f'Betting: FOR\n\n{ball2["type"].title()}')
                     if shop.winfo_exists():
                         shop.destroy()
                     roundNum.pack_forget()
