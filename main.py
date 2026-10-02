@@ -5,7 +5,7 @@ from extra_code.frames import frame
 from extra_code.tooltips import toolTip, stats
 from extra_code.damage import dmg
 from extra_code.windows import InternalWindow
-import random as ran
+import platform as plt
 
 def main(L=False, q=None):
     global money, rounds, winner, donations, bet, images, cos, cosset, ucos, roundNum, ball1, ball2, textbox1, textbox2, textboxM, textboxW, tooltip1, tooltip2, canvas, start_button, betting_enter, betting_frame, betting_ok1, betting_ok2, healthbar1, healthbar2, classtextbox1, classtextbox2, textbox_frame, shop_open, shop
@@ -90,7 +90,6 @@ def main(L=False, q=None):
         betting_frame.pack(pady = 5)
         betting_ok1.pack(side=tk.LEFT, padx=5)
         betting_ok2.pack(side=tk.LEFT, padx=5)
-        speedbutt.pack(pady=20,side=tk.BOTTOM)
         shop_open.pack(pady=10,side=tk.BOTTOM)
 
         root.update_idletasks()
@@ -129,6 +128,7 @@ def main(L=False, q=None):
         healthbar2.pack_forget()
         classtextbox1.pack_forget()
         classtextbox2.pack_forget()
+        speedbutt.pack_forget()
         new = None
         if winner == 'draw':
             textboxW = tk.Label(text=f'It was a draw.\n\nNo money was changed.',bg="#494949")
@@ -179,6 +179,7 @@ def main(L=False, q=None):
                     canvas.pack(expand=True, fill='none')
                     classtextbox2.pack(pady=2)
                     healthbar2.pack(pady=2)
+                    speedbutt.pack(pady=20,side=tk.BOTTOM)
                     
 
                     root.after(0,lambda: frame(canvas, root, ball1, ball2, healthbar1, healthbar2, winner, round_won, 0, dmg, [classtextbox1, classtextbox2], cos, cosset, splits=[]))
@@ -201,8 +202,12 @@ def main(L=False, q=None):
     betting_frame = tk.Frame(root, bg="#494949")
     betting_ok1 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 1', command = lambda: start('ball1'))
     betting_ok2 = tk.Button(betting_frame, highlightbackground="#494949", text='Ball 2', command = lambda: start('ball2'))
-    healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
-    healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
+    if plt.system() == 'Linux':
+        healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,15))
+        healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,15))
+    else:
+        healthbar1 = tk.Label(text=None,fg='red', bg="#494949",font=(None,30))
+        healthbar2 = tk.Label(text=None,fg='blue', bg="#494949",font=(None,30))
     classtextbox1 = tk.Label(text=None,fg='red', bg="#494949")
     classtextbox2 = tk.Label(text=None,fg='blue', bg="#494949")
     textbox_frame = tk.Frame(root, bg="#494949")
